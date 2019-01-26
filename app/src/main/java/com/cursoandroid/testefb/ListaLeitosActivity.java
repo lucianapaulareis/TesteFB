@@ -26,7 +26,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    private List<Leito> leitos = new ArrayList<Leito>();
+    private List<Leito> leitos = new ArrayList<>();
     private ArrayAdapter<Leito> arrayAdapterLeito;
     ListView listV_leitos;
 
@@ -79,9 +79,9 @@ public class ListaLeitosActivity extends AppCompatActivity {
                     leitos.add(l);
                 }
 
-                arrayAdapterLeito = new ArrayAdapter<Leito>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
+                arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
                 listV_leitos.setAdapter(arrayAdapterLeito);
-                //APENAS PARA TESTE
+                //APENAS PARA TESTE i
 
             }
 
