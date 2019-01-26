@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "212899360233",
+    "firebase_url": "https://novo-98fe8.firebaseio.com",
+    "project_id": "novo-98fe8",
+    "storage_bucket": "novo-98fe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212899360233:android:f772ea6e3a8633d7",
+        "android_client_info": {
+          "package_name": "com.cursoandroid.testefb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212899360233-r5dp4f6eeld442lf2vfsmcajnaneeqo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cursoandroid.testefb",
+            "certificate_hash": "b8f945f50af5531bc1429d0dca94b39dde49f1fe"
+          }
+        },
+        {
+          "client_id": "212899360233-vq2ccr9qpqud8ni6v94ld8ru8bsttq5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4VxmSmsgmc3HE5L8KDvMQprNHdsfyf_s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212899360233-vq2ccr9qpqud8ni6v94ld8ru8bsttq5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
