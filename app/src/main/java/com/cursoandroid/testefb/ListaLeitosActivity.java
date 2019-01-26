@@ -81,7 +81,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
 
                 arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
                 listV_leitos.setAdapter(arrayAdapterLeito);
-                //APENAS PARA TESTE i
+                //APENAS PARA TESTE iokij
 
             }
 
