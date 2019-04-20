@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//Alterar o App para ler as informações no modelo atualizado de dados.
+//Alterar o App para ler as informações no modelo atualizado de dados
 
 public class ListaLeitosActivity extends AppCompatActivity {
 
