@@ -8,7 +8,7 @@ public class GrupoUsuario implements Parcelable {
     private String grupo;
 
     public GrupoUsuario(){
-        
+
     }
 
     public GrupoUsuario(Parcel in) {
