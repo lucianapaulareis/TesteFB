@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         listV_dados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(MainActivity.this, NadaActivity.class);
-                intent.putExtra("leitos", leitos.get(position));
+                Intent intent = new Intent(MainActivity.this, ListaLeitosActivity.class);
+                intent.putExtra("setor", setores.get(position));
                 startActivity(intent);
             }
         });
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Listener para monitorar alterações no banco de dados
     private void eventoDatabase() {
-        /*databaseReference.child("Setores").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Setores").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Para não ficar sobrescrevendo
@@ -105,28 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 //Listando dados do firebase na listView
                 arrayAdapterSetor = new ArrayAdapter<Setor>(MainActivity.this, android.R.layout.simple_list_item_1,setores);
                 listV_dados.setAdapter(arrayAdapterSetor);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
-        databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //Para não ficar sobrescrevendo
-                leitos.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    //Traz na ordem que estiver no banco, cada um dos objetos Usuario
-                    Leito u = objSnapshot.getValue(Leito.class);
-                    leitos.add(u);
-                }
-
-                //Listando dados do firebase na listView
-                arrayAdapterLeito = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1,leitos);
-                listV_dados.setAdapter(arrayAdapterLeito);
             }
 
             @Override

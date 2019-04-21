@@ -59,7 +59,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 //Toast.makeText(ListaLeitosActivity.this, "Leito: "+position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
                 intent.putExtra("leito", leitos.get(position));
-                intent.putExtra("idSetor", idSetor);
+                //intent.putExtra("idSetor", idSetor);
                 startActivity(intent);
             }
         });
@@ -71,27 +71,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
         String idSetor = setor.getUid();
-        // Tenho que modificar esse trecho
 
-        /*databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                leitos.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Leito l = objSnapshot.getValue(Leito.class);
-                    leitos.add(l);
-                }
-                arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
-                listV_leitos.setAdapter(arrayAdapterLeito);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-        //======================================================================================================================
-        // PRIMEIRA VERSÃ DA PESQUISA DE LEITOS - DEIXO PARA REFERÊNCIA
         databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

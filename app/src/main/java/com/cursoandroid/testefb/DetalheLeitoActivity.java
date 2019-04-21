@@ -95,11 +95,7 @@ public class DetalheLeitoActivity extends AppCompatActivity {
 
             }
         });
-
-
-
         inicializarFirebase();
-
     }
 
 
@@ -112,24 +108,24 @@ public class DetalheLeitoActivity extends AppCompatActivity {
     public void alterar(View view){
         Intent intent = getIntent();
         Leito leito = intent.getParcelableExtra("leito");
-        String idSetor = intent.getStringExtra("idSetor");
+        //String idSetor = intent.getStringExtra("idSetor");
         String idLeito = leito.getUid();
         String nomeLeito = leito.getNome();
+        String idSetor = leito.getSid();
         leito = new Leito();
         leito.setUid(idLeito);
         leito.setNome(nomeLeito);
+        leito.setSid(idSetor);
         EditText novoSituacao = (EditText) findViewById(R.id.situacaoLeito);
         String status = novoSituacao.getText().toString().trim();
         if(status.equals("")){
             Toast.makeText(DetalheLeitoActivity.this, "Por favor preencha o campo Status do Leito.", Toast.LENGTH_SHORT).show();
         }
         else{
-
             leito.setSituacao(status);
-            databaseReference.child("Setores").child(idSetor).child("Leitos").child(idLeito).setValue(leito);
+            databaseReference.child("Leitos").child(idLeito).setValue(leito);
             Toast.makeText(DetalheLeitoActivity.this, "Status do leito: "+nomeLeito+"\nAlterado para: "+status, Toast.LENGTH_LONG).show();
             finish();
         }
-
     }
 }
