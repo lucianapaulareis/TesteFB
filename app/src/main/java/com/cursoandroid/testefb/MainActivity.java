@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, NadaActivity.class);
-                intent.putExtra("grupos", grupos.get(position));
+                intent.putExtra("leitos", leitos.get(position));
                 startActivity(intent);
             }
         });
@@ -113,20 +113,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        databaseReference.child("Grupo de Usuario").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Para não ficar sobrescrevendo
-                grupos.clear();
+                leitos.clear();
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     //Traz na ordem que estiver no banco, cada um dos objetos Usuario
-                    GrupoUsuario u = objSnapshot.getValue(GrupoUsuario.class);
-                    grupos.add(u);
+                    Leito u = objSnapshot.getValue(Leito.class);
+                    leitos.add(u);
                 }
 
                 //Listando dados do firebase na listView
-                arrayAdapterGrupos = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1,grupos);
-                listV_dados.setAdapter(arrayAdapterGrupos);
+                arrayAdapterLeito = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1,leitos);
+                listV_dados.setAdapter(arrayAdapterLeito);
             }
 
             @Override
