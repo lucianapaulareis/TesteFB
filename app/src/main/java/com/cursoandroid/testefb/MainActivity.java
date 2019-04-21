@@ -31,12 +31,25 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
+    // Deu certo
     private List<Usuario> usuarios = new ArrayList<Usuario>();
     private ArrayAdapter<Usuario> arrayAdpterUsuario;
 
+    // Deu certo
     private List<Setor> setores = new ArrayList<Setor>();
     private ArrayAdapter<Setor> arrayAdapterSetor;
 
+
+    private List<Leito> leitos = new ArrayList<>();
+    private ArrayAdapter<Leito> arrayAdapterLeito;
+
+    // Deu certo
+    private List<Situacao> status = new ArrayList<Situacao>();
+    private ArrayAdapter<Situacao> arrayAdapterSituacao;
+
+
+    private List<GrupoUsuario> grupos = new ArrayList<>();
+    private ArrayAdapter<GrupoUsuario> arrayAdapterGrupos;
     Usuario usuarioSelecionado;
 
     @Override
@@ -69,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         listV_dados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(MainActivity.this, ListaLeitosActivity.class);
-                intent.putExtra("setor", setores.get(position));
+                Intent intent = new Intent(MainActivity.this, NadaActivity.class);
+                intent.putExtra("situacao", status.get(position));
                 startActivity(intent);
             }
         });
@@ -78,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Listener para monitorar alterações no banco de dados
     private void eventoDatabase() {
-        databaseReference.child("Setores").addValueEventListener(new ValueEventListener() {
+        /*databaseReference.child("Setores").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Para não ficar sobrescrevendo
@@ -92,6 +105,28 @@ public class MainActivity extends AppCompatActivity {
                 //Listando dados do firebase na listView
                 arrayAdapterSetor = new ArrayAdapter<Setor>(MainActivity.this, android.R.layout.simple_list_item_1,setores);
                 listV_dados.setAdapter(arrayAdapterSetor);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+        databaseReference.child("Grupo de Usuario").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Para não ficar sobrescrevendo
+                grupos.clear();
+                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    //Traz na ordem que estiver no banco, cada um dos objetos Usuario
+                    GrupoUsuario u = objSnapshot.getValue(GrupoUsuario.class);
+                    grupos.add(u);
+                }
+
+                //Listando dados do firebase na listView
+                arrayAdapterGrupos = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1,grupos);
+                listV_dados.setAdapter(arrayAdapterGrupos);
             }
 
             @Override
@@ -126,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
             Usuario usuario = new Usuario();
             usuario.setUid(UUID.randomUUID().toString());
             usuario.setNome(edtNome.getText().toString());
-            usuario.setSobrenome(edtSobrenome.getText().toString());
             databaseReference.child("Usuarios").child(usuario.getUid()).setValue(usuario);
             limparCampos();
         }
@@ -138,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             //Recebe valor que será digitado
                 //trim para tirar os espaços em branco (no início e no final da palavra)
             usuario.setNome(edtNome.getText().toString().trim());
-            usuario.setSobrenome(edtSobrenome.getText().toString().trim());
             databaseReference.child("Usuarios").child(usuario.getUid()).setValue(usuario);
             limparCampos();
         }

@@ -6,8 +6,6 @@ import android.os.Parcelable;
 public class Usuario implements Parcelable{
     private String uid;
     private String nome;
-    private String sobrenome;
-    private String sexo;
     private int idade;
 
     public Usuario() {
@@ -17,8 +15,6 @@ public class Usuario implements Parcelable{
     protected Usuario(Parcel in) {
         uid = in.readString();
         nome = in.readString();
-        sobrenome = in.readString();
-        sexo = in.readString();
         idade = in.readInt();
     }
 
@@ -50,7 +46,7 @@ public class Usuario implements Parcelable{
         this.nome = nome;
     }
 
-    public String getSobrenome() {
+    /*public String getSobrenome() {
         return sobrenome;
     }
 
@@ -64,7 +60,7 @@ public class Usuario implements Parcelable{
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
+    }*/
 
     public int getIdade() {
         return idade;
@@ -88,8 +84,8 @@ public class Usuario implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(uid);
         parcel.writeString(nome);
-        parcel.writeString(sobrenome);
-        parcel.writeString(sexo);
+        /*parcel.writeString(sobrenome);
+        parcel.writeString(sexo);*/
         parcel.writeInt(idade);
     }
 }

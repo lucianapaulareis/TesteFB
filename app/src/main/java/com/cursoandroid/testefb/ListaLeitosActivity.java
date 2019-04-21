@@ -71,7 +71,28 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
         String idSetor = setor.getUid();
-        databaseReference.child("Setores").child(idSetor).child("Leitos").addValueEventListener(new ValueEventListener() {
+        // Tenho que modificar esse trecho
+
+        /*databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                leitos.clear();
+                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    Leito l = objSnapshot.getValue(Leito.class);
+                    leitos.add(l);
+                }
+                arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
+                listV_leitos.setAdapter(arrayAdapterLeito);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+        //======================================================================================================================
+        // PRIMEIRA VERSÃ DA PESQUISA DE LEITOS - DEIXO PARA REFERÊNCIA
+        databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 leitos.clear();
@@ -82,8 +103,6 @@ public class ListaLeitosActivity extends AppCompatActivity {
 
                 arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
                 listV_leitos.setAdapter(arrayAdapterLeito);
-                //APENAS PARA TESTE iokij
-
             }
 
             @Override
@@ -91,6 +110,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
 
             }
         });
+        //======================================================================================================================
     }
 
     private void inicializarFirebase() {

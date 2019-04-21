@@ -4,18 +4,20 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Leito implements Parcelable {
-    private String id;
+    private String uid;
     private String nome;
     private String situacao;
+    private String sid;
 
     public Leito() {
 
     }
 
     protected Leito(Parcel in) {
-        id = in.readString();
+        uid = in.readString();
         nome = in.readString();
         situacao = in.readString();
+        sid = in.readString();
     }
 
     public static final Creator<Leito> CREATOR = new Creator<Leito>() {
@@ -31,11 +33,11 @@ public class Leito implements Parcelable {
     };
 
     public String getUid() {
-        return id;
+        return uid;
     }
 
     public void setUid(String uid) {
-        this.id = uid;
+        this.uid = uid;
     }
 
     public String getNome() {
@@ -54,6 +56,14 @@ public class Leito implements Parcelable {
         this.situacao = situacao;
     }
 
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
     @Override
     public String toString() {
         return nome;
@@ -66,8 +76,9 @@ public class Leito implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
+        parcel.writeString(uid);
         parcel.writeString(nome);
         parcel.writeString(situacao);
+        parcel.writeString(sid);
     }
 }

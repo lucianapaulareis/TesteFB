@@ -21,7 +21,8 @@
         <activity android:name=".UsuariosListActivity" />
         <activity android:name=".Teste" />
         <activity android:name=".ListaLeitosActivity" />
-        <activity android:name=".DetalheLeitoActivity"></activity>
+        <activity android:name=".DetalheLeitoActivity" />
+        <activity android:name=".NadaActivity"></activity>
     </application>
 
 </manifest>
