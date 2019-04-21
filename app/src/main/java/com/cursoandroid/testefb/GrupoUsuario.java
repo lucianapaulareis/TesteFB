@@ -7,13 +7,13 @@ public class GrupoUsuario implements Parcelable {
     private String gid;
     private String grupo;
 
+    public GrupoUsuario(){
+        
+    }
+
     public GrupoUsuario(Parcel in) {
         gid = in.readString();
         grupo = in.readString();
-    }
-
-    public GrupoUsuario(){
-        
     }
 
 
