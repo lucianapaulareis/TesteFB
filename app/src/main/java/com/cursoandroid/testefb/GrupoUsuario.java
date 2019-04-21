@@ -29,6 +29,22 @@ public class GrupoUsuario implements Parcelable {
         }
     };
 
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
     @Override
     public String toString() {
         return grupo;

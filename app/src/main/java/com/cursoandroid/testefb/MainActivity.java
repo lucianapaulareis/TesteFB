@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Situacao> arrayAdapterSituacao;
 
 
-    private List<GrupoUsuario> grupos = new ArrayList<>();
+    private List<GrupoUsuario> grupos = new ArrayList<GrupoUsuario>();
     private ArrayAdapter<GrupoUsuario> arrayAdapterGrupos;
     Usuario usuarioSelecionado;
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, NadaActivity.class);
-                intent.putExtra("situacao", status.get(position));
+                intent.putExtra("grupos", grupos.get(position));
                 startActivity(intent);
             }
         });
