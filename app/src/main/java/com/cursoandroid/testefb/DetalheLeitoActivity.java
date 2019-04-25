@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -55,7 +56,8 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         nomeS.add("Em Forragem");
         nomeS.add("Livre");
 
-        EditText id = (EditText) findViewById(R.id.idLeito);
+        //EditText id = (EditText) findViewById(R.id.idLeito);
+        TextView id = (TextView) findViewById(R.id.idLeito);
         if(idLeito != null){
             id.setText(idLeito);
         }
@@ -63,9 +65,9 @@ public class DetalheLeitoActivity extends AppCompatActivity {
             id.setText("Não está carregando ID do leito!!!");
         }
 
-        EditText nome = (EditText) findViewById(R.id.nomeLeito);
+        TextView nome = (TextView) findViewById(R.id.nomeLeito);
         nome.setText(nomeLeito);
-        EditText situacao = (EditText) findViewById(R.id.situacaoLeito);
+        TextView situacao = (TextView) findViewById(R.id.situacaoLeito);
         situacao.setText(situacaoLeito);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(DetalheLeitoActivity.this,
@@ -74,17 +76,17 @@ public class DetalheLeitoActivity extends AppCompatActivity {
 
         //Escolha do status do leito
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            EditText s1;
+            TextView s1;
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String status = nomeS.get(position);
                 if(status.equals("Selecione o novo Status")){
-                    s1 = (EditText) findViewById(R.id.situacaoLeito);
+                    s1 = (TextView) findViewById(R.id.situacaoLeito);
                     s1.setText(situacaoLeito);
                 }
                 else{
-                    s1 = (EditText) findViewById(R.id.situacaoLeito);
+                    s1 = (TextView) findViewById(R.id.situacaoLeito);
                     s1.setText(status);
                 }
 
@@ -116,7 +118,7 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         leito.setUid(idLeito);
         leito.setNome(nomeLeito);
         leito.setSid(idSetor);
-        EditText novoSituacao = (EditText) findViewById(R.id.situacaoLeito);
+        TextView novoSituacao = (TextView) findViewById(R.id.situacaoLeito);
         String status = novoSituacao.getText().toString().trim();
         if(status.equals("")){
             Toast.makeText(DetalheLeitoActivity.this, "Por favor preencha o campo Status do Leito.", Toast.LENGTH_SHORT).show();

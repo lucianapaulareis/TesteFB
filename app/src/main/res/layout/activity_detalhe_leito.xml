@@ -16,12 +16,13 @@
         android:text="ID Leito:"
         android:id="@+id/textView1"/>
 
-    <EditText
-        android:layout_height="wrap_content"
+    <TextView
+        android:layout_height="@dimen/dimen_detalhe"
         android:layout_width="match_parent"
         android:id="@+id/idLeito"
-        android:inputType="textPersonName"
-        android:ems="10"/>
+        android:inputType="textPersonName"/>
+        <!-- android:ems="10" -->
+
 
     <TextView
         android:layout_height="wrap_content"
@@ -29,12 +30,12 @@
         android:text="Nome do Leito:"
         android:id="@+id/textView2"/>
 
-    <EditText
-        android:layout_height="wrap_content"
+    <TextView
+        android:layout_height="@dimen/dimen_detalhe"
         android:layout_width="match_parent"
         android:id="@+id/nomeLeito"
         android:inputType="textPersonName"
-        android:ems="10"/>
+        />
 
     <TextView
         android:layout_height="wrap_content"
@@ -42,8 +43,8 @@
         android:text="Situaçao do Leito:"
         android:id="@+id/textView3"/>
 
-    <EditText
-        android:layout_height="wrap_content"
+    <TextView
+        android:layout_height="@dimen/dimen_detalhe"
         android:layout_width="match_parent"
         android:id="@+id/situacaoLeito"
         android:inputType="textPersonName"

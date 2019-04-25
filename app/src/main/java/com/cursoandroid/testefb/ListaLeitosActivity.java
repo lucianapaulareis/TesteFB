@@ -72,7 +72,31 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Setor setor = intent.getParcelableExtra("setor");
         String idSetor = setor.getUid();
 
-        databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
+        //Query para listar os leitos de determinado setor, identificando-o pelo "idSetor"
+        databaseReference.child("Leitos").orderByChild("sid").equalTo(idSetor).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                leitos.clear();
+                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    Leito l = objSnapshot.getValue(Leito.class);
+                    leitos.add(l);
+                }
+                arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
+                listV_leitos.setAdapter(arrayAdapterLeito);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+        /*databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 leitos.clear();
@@ -89,7 +113,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
         //======================================================================================================================
     }
 
