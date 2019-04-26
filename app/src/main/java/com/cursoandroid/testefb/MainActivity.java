@@ -25,17 +25,16 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edtNome, edtSobrenome;
+   /* EditText edtNome, edtSobrenome;
     ListView listV_dados;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    // Deu certo
     private List<Usuario> usuarios = new ArrayList<Usuario>();
     private ArrayAdapter<Usuario> arrayAdpterUsuario;
 
-    // Deu certo
+
     private List<Setor> setores = new ArrayList<Setor>();
     private ArrayAdapter<Setor> arrayAdapterSetor;
 
@@ -43,28 +42,36 @@ public class MainActivity extends AppCompatActivity {
     private List<Leito> leitos = new ArrayList<>();
     private ArrayAdapter<Leito> arrayAdapterLeito;
 
-    // Deu certo
+
     private List<Situacao> status = new ArrayList<Situacao>();
     private ArrayAdapter<Situacao> arrayAdapterSituacao;
 
 
     private List<GrupoUsuario> grupos = new ArrayList<GrupoUsuario>();
     private ArrayAdapter<GrupoUsuario> arrayAdapterGrupos;
-    Usuario usuarioSelecionado;
+    Usuario usuarioSelecionado;*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void listarSetores(View View) {
+        Intent it = new Intent(this, ListaSetoresActivity.class);
+        startActivityForResult(it, 1);
+    }
+
+
+    public void listarLeitos(View View) {
+        Intent it = new Intent(this, LeitosOpcoesActivity.class);
+        startActivityForResult(it, 1);
+    }
+}
 
 
 
-        /*edtNome = (EditText) findViewById(R.id.editNome);
-        edtSobrenome = (EditText) findViewById(R.id.editSobrenome);*/
-        listV_dados = (ListView) findViewById(R.id.listV_dados);
-
-        inicializarFirebase();
-        eventoDatabase();
 
         /*listV_dados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -79,49 +86,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        listV_dados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(MainActivity.this, ListaLeitosActivity.class);
-                intent.putExtra("setor", setores.get(position));
-                startActivity(intent);
-            }
-        });
-    }
 
-    //Listener para monitorar alterações no banco de dados
-    private void eventoDatabase() {
-        databaseReference.child("Setores").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //Para não ficar sobrescrevendo
-                setores.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    //Traz na ordem que estiver no banco, cada um dos objetos Usuario
-                    Setor s = objSnapshot.getValue(Setor.class);
-                    setores.add(s);
-                }
 
-                //Listando dados do firebase na listView
-                arrayAdapterSetor = new ArrayAdapter<Setor>(MainActivity.this, android.R.layout.simple_list_item_1,setores);
-                listV_dados.setAdapter(arrayAdapterSetor);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    //Método para inicializar o Firebase
-    private void inicializarFirebase(){
-        FirebaseApp.initializeApp(MainActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        //Permite salvar os dados na nuvem, como também dentro do app
-        //firebaseDatabase.setPersistenceEnabled(true);
-        databaseReference = firebaseDatabase.getReference();
-    }
 
 
     //Método para alterar o menu
@@ -130,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }*/
-
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //Verifica qual botão do menu está sendo selecionado
         int id = item.getItemId();
@@ -169,5 +135,5 @@ public class MainActivity extends AppCompatActivity {
     private void limparCampos() {
         edtNome.setText("");
         edtSobrenome.setText("");
-    }
-}
+    }*/
+

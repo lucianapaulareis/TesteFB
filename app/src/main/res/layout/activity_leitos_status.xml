@@ -7,37 +7,30 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cursoandroid.testefb.MainActivity">
-
-
+    tools:context="com.cursoandroid.testefb.LeitosStatusActivity">
 
     <TextView
+        android:id="@+id/situacaoLeito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Menu Principal"
-        android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/idSetor"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listar Setores"
-        android:onClick="listarSetores"
-        android:id="@+id/listarSetores"
-        android:layout_marginTop="97dp"
-        android:layout_below="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/nomeSetorId"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="fill_parent"
+    <ListView
+        android:id="@+id/listV_leitos"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listar Leitos"
-        android:onClick="listarLeitos"
-        android:id="@+id/listarLeitos"
-        android:layout_below="@+id/listarSetores"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_below="@+id/nomeSetorId"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp" />
 
 </RelativeLayout>

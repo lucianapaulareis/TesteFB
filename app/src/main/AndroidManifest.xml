@@ -22,7 +22,10 @@
         <activity android:name=".Teste" />
         <activity android:name=".ListaLeitosActivity" />
         <activity android:name=".DetalheLeitoActivity" />
-        <activity android:name=".NadaActivity"></activity>
+        <activity android:name=".NadaActivity" />
+        <activity android:name=".ListaSetoresActivity" />
+        <activity android:name=".LeitosOpcoesActivity" />
+        <activity android:name=".LeitosStatusActivity"></activity>
     </application>
 
 </manifest>
