@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +47,15 @@ public class LeitosStatusActivity extends AppCompatActivity {
 
         inicializarFirebase();
         eventoDatabase();
+
+        listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(LeitosStatusActivity.this, DetalheLeitoActivity.class);
+                intent.putExtra("leito", leitos.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     private void eventoDatabase() {
