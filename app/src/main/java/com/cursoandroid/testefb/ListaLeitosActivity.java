@@ -40,15 +40,11 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Setor setor = intent.getParcelableExtra("setor");
         final String idSetor = setor.getUid();
         String nomeSetor = setor.getNome();
-
         TextView id = (TextView) findViewById(R.id.idSetor);
         id.setText(idSetor);
         TextView nome = (TextView) findViewById(R.id.nomeSetorId);
         nome.setText(nomeSetor);
-
         listV_leitos = (ListView) findViewById(R.id.listV_leitos);
-
-
         inicializarFirebase();
         eventoDatabase();
 
@@ -63,15 +59,12 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void eventoDatabase() {
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
         String idSetor = setor.getUid();
-
         //Query para listar os leitos de determinado setor, identificando-o pelo "idSetor"
         databaseReference.child("Leitos").orderByChild("sid").equalTo(idSetor).addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,37 +77,10 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
                 listV_leitos.setAdapter(arrayAdapterLeito);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
-
-
-
-
-        /*databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                leitos.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Leito l = objSnapshot.getValue(Leito.class);
-                    leitos.add(l);
-                }
-
-                arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
-                listV_leitos.setAdapter(arrayAdapterLeito);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-        //======================================================================================================================
     }
 
     private void inicializarFirebase() {

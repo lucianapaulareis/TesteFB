@@ -17,16 +17,12 @@ public class DetalheUsuario extends AppCompatActivity {
         Usuario usuario = intent.getParcelableExtra("usuario");
         //String idUsuario = usuario.getUid();
         String nomeUsuario = usuario.getNome();
-        int idadeUsuario = usuario.getIdade();
 
         /*TextView id = (TextView) findViewById(R.id.idUsuario);
         id.setText(idUsuario);*/
 
         EditText nome = (EditText) findViewById(R.id.nomeUsuario);
         nome.setText(nomeUsuario);
-
-        EditText idade = (EditText) findViewById(R.id.idadeUsuario);
-        idade.setText(idadeUsuario);
 
 
     }

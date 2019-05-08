@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TesteFB</string>
+    <string name="botao_cadastrar">Cadastrar</string>
+    <string name="botao_autenticar">Autenticar</string>
+    <string name="botao_logar">Logar</string>
+    <string name="texto_cadastre">Não tem conta? Cadastre-se</string>
 </resources>

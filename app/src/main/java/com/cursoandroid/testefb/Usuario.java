@@ -3,22 +3,42 @@ package com.cursoandroid.testefb;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Usuario implements Parcelable{
-    private String uid;
-    private String nome;
-    private int idade;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.Serializable;
+
+//public class Usuario implements Parcelable
+public class Usuario implements Serializable{
+    public String uid;
+    public String nome;
+    public String email;
+    public String senha;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     public Usuario() {
 
     }
 
-    protected Usuario(Parcel in) {
-        uid = in.readString();
-        nome = in.readString();
-        idade = in.readInt();
+    public Usuario(String uid, String nome, String email, String senha) {
+        this.uid = uid;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
     }
 
-    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+    /*protected Usuario(Parcel in) {
+        uid = in.readString();
+        nome = in.readString();
+        email = in.readString();
+        senha = in.readString();
+    }*/
+
+    /*public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
         @Override
         public Usuario createFromParcel(Parcel in) {
             return new Usuario(in);
@@ -28,7 +48,7 @@ public class Usuario implements Parcelable{
         public Usuario[] newArray(int size) {
             return new Usuario[size];
         }
-    };
+    };*/
 
     public String getUid() {
         return uid;
@@ -46,31 +66,34 @@ public class Usuario implements Parcelable{
         this.nome = nome;
     }
 
-    /*public String getSobrenome() {
-        return sobrenome;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /*public void salvar(){
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Usuarios").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
     }*/
 
-    public int getIdade() {
-        return idade;
-    }
+    /*private void inicializarFirebase() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }*/
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
 
-    @Override
+    /*@Override
     public String toString() {
         return nome;
     }
@@ -84,8 +107,7 @@ public class Usuario implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(uid);
         parcel.writeString(nome);
-        /*parcel.writeString(sobrenome);
-        parcel.writeString(sexo);*/
-        parcel.writeInt(idade);
-    }
+        parcel.writeString(email);
+        parcel.writeString(senha);
+    }*/
 }

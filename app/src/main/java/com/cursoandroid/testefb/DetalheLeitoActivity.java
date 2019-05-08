@@ -110,7 +110,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
     public void alterar(View view){
         Intent intent = getIntent();
         Leito leito = intent.getParcelableExtra("leito");
-        //String idSetor = intent.getStringExtra("idSetor");
         String idLeito = leito.getUid();
         String nomeLeito = leito.getNome();
         String idSetor = leito.getSid();
