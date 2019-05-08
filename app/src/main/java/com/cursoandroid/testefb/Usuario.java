@@ -6,30 +6,23 @@ import android.os.Parcelable;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 
 //public class Usuario implements Parcelable
-public class Usuario implements Serializable{
-    public String uid;
-    public String nome;
-    public String email;
-    public String senha;
-
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+public class Usuario{
+    private String uid;
+    private String nome;
+    private String email;
+    private String senha;
 
     public Usuario() {
 
     }
 
-    public Usuario(String uid, String nome, String email, String senha) {
-        this.uid = uid;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
+
 
     /*protected Usuario(Parcel in) {
         uid = in.readString();
@@ -50,6 +43,7 @@ public class Usuario implements Serializable{
         }
     };*/
 
+
     public String getUid() {
         return uid;
     }
@@ -66,6 +60,8 @@ public class Usuario implements Serializable{
         this.nome = nome;
     }
 
+    //Quando o firebase for salvar esse objeto, não vai levar em consideração a senha (Não vai salvar a senha)
+    @Exclude
     public String getSenha() {
         return senha;
     }
@@ -82,10 +78,10 @@ public class Usuario implements Serializable{
         this.email = email;
     }
 
-    /*public void salvar(){
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+    public void salvar(){
+        DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
         databaseReference.child("Usuarios").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
-    }*/
+    }
 
     /*private void inicializarFirebase() {
         firebaseDatabase = FirebaseDatabase.getInstance();

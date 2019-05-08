@@ -39,5 +39,14 @@
         android:layout_below="@+id/listarSetores"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sair"
+        android:id="@+id/bt_sair"
+        android:layout_below="@+id/listarLeitos"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp" />
+
 
 </RelativeLayout>
