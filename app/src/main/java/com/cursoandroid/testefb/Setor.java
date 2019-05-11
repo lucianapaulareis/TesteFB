@@ -3,6 +3,8 @@ package com.cursoandroid.testefb;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.DatabaseReference;
+
 public class Setor implements Parcelable{
     private String uid;
     private String nome;
@@ -42,6 +44,11 @@ public class Setor implements Parcelable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void salvar(){
+        DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
+        databaseReference.child("Setores").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
     }
 
     @Override

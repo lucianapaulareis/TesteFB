@@ -49,5 +49,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void listarSetores(View View) {
+        Intent it = new Intent(this, ListaSetoresActivity.class);
+        startActivityForResult(it, 1);
+    }
+
+
+    public void listarLeitos(View View) {
+        Intent it = new Intent(this, LeitosOpcoesActivity.class);
+        startActivityForResult(it, 1);
+    }
+
+    public void cadastraSetores (View View){
+        Intent it = new Intent(this, CadastroSetorActivity.class);
+        startActivity(it);
+    }
+
+    public void cadastraLeito(View view){
+        Intent it = new Intent(this, CadastroLeitoActivity.class);
+        startActivity(it);
+    }
+
+
 
 }

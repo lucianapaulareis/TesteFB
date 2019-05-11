@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
 

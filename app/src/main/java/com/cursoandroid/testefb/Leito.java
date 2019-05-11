@@ -3,6 +3,8 @@ package com.cursoandroid.testefb;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.DatabaseReference;
+
 public class Leito implements Parcelable {
     private String uid;
     private String nome;
@@ -62,6 +64,11 @@ public class Leito implements Parcelable {
 
     public void setSid(String sid) {
         this.sid = sid;
+    }
+
+    public void salvar(){
+        DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
+        databaseReference.child("Leitos").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
     }
 
     @Override
