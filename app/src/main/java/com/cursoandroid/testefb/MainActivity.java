@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(it);
     }
 
+    public void gerenciarUsuarios(View view){
+        Intent it = new Intent(this, GerenciaUsuariosActivity.class);
+        startActivity(it);
+    }
 
 
 }

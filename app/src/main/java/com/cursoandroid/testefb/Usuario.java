@@ -12,11 +12,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.Serializable;
 
 //public class Usuario implements Parcelable
-public class Usuario{
+public class Usuario implements Parcelable{
     private String uid;
     private String nome;
     private String email;
     private String senha;
+    private String grupo;
 
     public Usuario() {
 
@@ -24,14 +25,15 @@ public class Usuario{
 
 
 
-    /*protected Usuario(Parcel in) {
+    protected Usuario(Parcel in) {
         uid = in.readString();
         nome = in.readString();
         email = in.readString();
         senha = in.readString();
-    }*/
+        grupo = in.readString();
+    }
 
-    /*public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
         @Override
         public Usuario createFromParcel(Parcel in) {
             return new Usuario(in);
@@ -41,7 +43,7 @@ public class Usuario{
         public Usuario[] newArray(int size) {
             return new Usuario[size];
         }
-    };*/
+    };
 
 
     public String getUid() {
@@ -78,18 +80,21 @@ public class Usuario{
         this.email = email;
     }
 
+    public String getGrupo(){
+        return grupo;
+    }
+
+    public void setGrupo(String grupo){
+        this.grupo = grupo;
+    }
+
     public void salvar(){
         DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
         databaseReference.child("Usuarios").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
     }
 
-    /*private void inicializarFirebase() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }*/
 
-
-    /*@Override
+    @Override
     public String toString() {
         return nome;
     }
@@ -105,5 +110,6 @@ public class Usuario{
         parcel.writeString(nome);
         parcel.writeString(email);
         parcel.writeString(senha);
-    }*/
+        parcel.writeString(grupo);
+    }
 }

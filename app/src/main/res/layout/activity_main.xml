@@ -76,5 +76,14 @@
         android:layout_below="@+id/listarSetores"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Gerenciar Usuários"
+        android:onClick="gerenciarUsuarios"
+        android:id="@+id/bt_gerenciar_usuarios"
+        android:layout_below="@+id/bt_mudarLeitoSetor"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

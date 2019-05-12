@@ -32,7 +32,9 @@
         <activity android:name=".ValidadorActivity" />
         <activity android:name=".CadastroUsuarioActivity" />
         <activity android:name=".CadastroSetorActivity" />
-        <activity android:name=".CadastroLeitoActivity"></activity>
+        <activity android:name=".CadastroLeitoActivity" />
+        <activity android:name=".GerenciaUsuariosActivity" />
+        <activity android:name=".DetalheUsuarioActivity"></activity>
     </application>
 
 </manifest>
