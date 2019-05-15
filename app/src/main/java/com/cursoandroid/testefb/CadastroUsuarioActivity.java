@@ -28,6 +28,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText nome;
     private EditText email;
     private EditText senha;
+    private EditText confirmacaoSenha;
     private Button botaoCadastrar;
     private Usuario usuario;
 
@@ -41,17 +42,25 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         nome = (EditText) findViewById(R.id.edit_cadastro_nome);
         email = (EditText) findViewById(R.id.edit_cadastro_email);
         senha = (EditText) findViewById(R.id.edit_cadastro_senha);
+        confirmacaoSenha = (EditText) findViewById(R.id.edit_cadastro_senhaConfirma);
         botaoCadastrar = (Button) findViewById(R.id.botao_cadastrar);
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usuario = new Usuario();
-                usuario.setNome(nome.getText().toString());
-                usuario.setEmail(email.getText().toString());
-                usuario.setSenha(senha.getText().toString());
-                //inicializarFirebase();
-                cadastrarUsuario();
+                    usuario = new Usuario();
+                    usuario.setNome(nome.getText().toString());
+                    String senhaUser = senha.getText().toString();
+                    String confirmaSenha = confirmacaoSenha.getText().toString();
+                    usuario.setEmail(email.getText().toString());
+                    usuario.setSenha(senha.getText().toString());
+                if(senhaUser.equals(confirmaSenha)){
+                    cadastrarUsuario();
+                }
+                else{
+                    Toast.makeText(CadastroUsuarioActivity.this, "Senha não confere.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

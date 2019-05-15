@@ -17,25 +17,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="162dp"
-        android:hint="Digite seu nome." />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_login_senha"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="Digite sua senha." />
+        android:hint="Digite seu nome" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/botao_logar"
         android:id="@+id/botao_logar"
-        android:layout_below="@+id/edit_login_senha"
+        android:layout_below="@+id/edit_login_email"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="100dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,10 +35,20 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/texto_cadastre"
         android:id="@+id/textView10"
-        android:layout_marginTop="20dp"
+        android:textColor="#000000"
+        android:onClick="abrirCadastroUsuario"
         android:layout_below="@+id/botao_logar"
         android:layout_centerHorizontal="true"
-        android:textColor="#000000"
-        android:onClick="abrirCadastroUsuario" />
+        android:layout_marginTop="40dp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/edit_login_senha"
+        android:layout_below="@+id/edit_login_email"
+        android:layout_centerHorizontal="true"
+        android:hint="Digite sua senha" />
 
 </RelativeLayout>

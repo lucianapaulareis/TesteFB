@@ -17,53 +17,93 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private DatabaseReference databaseReference;
-
     private EditText email;
     private EditText senha;
     private Button botaoLogar;
     private Usuario usuario;
-    FirebaseAuth autenticacao;
+    private FirebaseAuth autenticacao;
+    private DatabaseReference databaseReference;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        if(autenticacao.getCurrentUser() == null){
+            setContentView(R.layout.activity_login);
+            email = (EditText) findViewById(R.id.edit_login_email);
+            senha = (EditText) findViewById(R.id.edit_login_senha);
+            botaoLogar = (Button) findViewById(R.id.botao_logar);
 
-        verificarUsuarioLogado();
+            botaoLogar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    usuario = new Usuario();
+                    usuario.setEmail(email.getText().toString());
+                    usuario.setSenha(senha.getText().toString());
+                    validarLogin();
+                }
+            });
+        }
+        else{
+            String idUsuario = autenticacao.getUid();
+            verificarUsuarioLogado(idUsuario);
+        }
 
-        email = (EditText) findViewById(R.id.edit_login_email);
-        senha = (EditText) findViewById(R.id.edit_login_senha);
-        botaoLogar = (Button) findViewById(R.id.botao_logar);
 
-        botaoLogar.setOnClickListener(new View.OnClickListener() {
+
+
+    }
+
+    private void verificarUsuarioLogado(String idUser) {
+        databaseReference = ConfiguracaoFirebase.getFirebase();
+        databaseReference.child("Usuarios").child(idUser).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                usuario = new Usuario();
-                usuario.setEmail(email.getText().toString());
-                usuario.setSenha(senha.getText().toString());
-                validarLogin();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String group = (String) dataSnapshot.child("grupo").getValue();
+                if(group == null){
+                    Toast.makeText(LoginActivity.this, "Usuário não está alocado em um grupo de permissão!", Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(LoginActivity.this, NadaActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else{
+                    if(group.equals("001")){
+                        //Toast.makeText(LoginActivity.this, "É Administrador, CORRREEEEEEEEEE!!!", Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                        it.putExtra("grupoUsuario", group);
+                        startActivity(it);
+                        finish();
+                    }
+                    else{
+                        //Toast.makeText(LoginActivity.this, "Não é Administrador Galera!!!", Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                        it.putExtra("grupoUsuario", group);
+                        startActivity(it);
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
 
-    private void verificarUsuarioLogado() {
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        if(autenticacao.getCurrentUser() != null){
-            abrirTelaPrincipal();
-        }
-    }
-
     private void validarLogin() {
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        databaseReference = ConfiguracaoFirebase.getFirebase();
         autenticacao.signInWithEmailAndPassword(
                 usuario.getEmail(),
                 usuario.getSenha()
@@ -71,8 +111,33 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){//Se a autenticação deu certo
-                    abrirTelaPrincipal();
-                    Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_SHORT).show();
+                    if(autenticacao.getCurrentUser() != null){
+                        String id = autenticacao.getUid();
+                        databaseReference.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String group = (String) dataSnapshot.child("grupo").getValue();
+                                if(group == null){
+                                    Toast.makeText(LoginActivity.this, "Usuário não está alocado em um grupo de permissão!", Toast.LENGTH_LONG).show();
+                                    autenticacao.signOut();
+                                }
+                                else{
+                                    if(group.equals("001")){
+                                        abrirTelaPrincipal(group);
+                                    }
+                                    else{
+                                        abrirTelaPrincipal(group);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
                 else{
                     String erroExecao = "";
@@ -91,10 +156,21 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void abrirTelaPrincipal() {
-        Intent it = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(it);
-        //finish();
+    private void abrirTelaPrincipal(String id) {
+        if(id.equals("001")){
+            Intent it = new Intent(LoginActivity.this, MainActivity.class);
+            it.putExtra("grupoUsuario", id);
+            startActivity(it);
+            finish();
+        }
+        else{
+            Intent it = new Intent(LoginActivity.this, NadaActivity.class);
+            it.putExtra("grupoUsuario", id);
+            startActivity(it);
+            finish();
+        }
+
+
     }
 
     public void abrirCadastroUsuario(View view){
