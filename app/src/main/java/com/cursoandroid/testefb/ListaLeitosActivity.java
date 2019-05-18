@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -36,8 +37,11 @@ public class ListaLeitosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_leitos);
 
+
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
+        final String grupo = intent.getStringExtra("grupo");
+        Toast.makeText(ListaLeitosActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
         final String idSetor = setor.getUid();
         String nomeSetor = setor.getNome();
         TextView id = (TextView) findViewById(R.id.idSetor);
@@ -55,6 +59,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 //Toast.makeText(ListaLeitosActivity.this, "Leito: "+position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
                 intent.putExtra("leito", leitos.get(position));
+                intent.putExtra("grupo", grupo);
                 //intent.putExtra("idSetor", idSetor);
                 startActivity(intent);
             }

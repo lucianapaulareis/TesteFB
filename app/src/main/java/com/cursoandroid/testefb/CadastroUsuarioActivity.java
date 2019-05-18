@@ -23,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
-    FirebaseDatabase firebaseDatabase;
 
     private EditText nome;
     private EditText email;
@@ -50,9 +49,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             public void onClick(View view) {
                     usuario = new Usuario();
                     usuario.setNome(nome.getText().toString());
+                    usuario.setEmail(email.getText().toString());
                     String senhaUser = senha.getText().toString();
                     String confirmaSenha = confirmacaoSenha.getText().toString();
-                    usuario.setEmail(email.getText().toString());
                     usuario.setSenha(senha.getText().toString());
                 if(senhaUser.equals(confirmaSenha)){
                     cadastrarUsuario();

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private DatabaseReference databaseReference;
     private Button botaoSair;
+    private String grupo;
     private Button botaoCadastrarLeito;
 
 
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent it = getIntent();
+        grupo = it.getStringExtra("grupoUsuario");
+        Toast.makeText(MainActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
+
         botaoCadastrarLeito = (Button) findViewById(R.id.bt_cadastrar_leito);
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         databaseReference = ConfiguracaoFirebase.getFirebase();
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void listarSetores(View View) {
         Intent it = new Intent(this, ListaSetoresActivity.class);
+        it.putExtra("grupo",grupo);
         startActivityForResult(it, 1);
     }
 

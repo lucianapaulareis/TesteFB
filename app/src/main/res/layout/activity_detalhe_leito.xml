@@ -57,20 +57,34 @@
         android:text="Novo Status do Leito:"
         android:id="@+id/textView6" />
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/edit_novoStatus" />
+
+    <RelativeLayout
+        android:id="@+id/conjuntoEdicao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
     <Spinner
         android:id="@+id/seletor"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salvar"
+            android:id="@+id/bt_salvar_alteracao"
+            android:onClick="alterar"
+            android:layout_below="@+id/seletor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Salvar Alteração"
-        android:id="@+id/botaoAlterarId"
-        android:onClick="alterar"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp" />
+    </RelativeLayout>
 
 </LinearLayout>
