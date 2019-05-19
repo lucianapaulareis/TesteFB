@@ -31,10 +31,7 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
-    private DatabaseReference databaseReference;
-    private Button botaoSair;
     private String grupo;
-    private Button botaoCadastrarLeito;
 
 
     @Override
@@ -45,12 +42,9 @@ public class MainActivity extends AppCompatActivity {
         Intent it = getIntent();
         grupo = it.getStringExtra("grupoUsuario");
         Toast.makeText(MainActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
-
-        botaoCadastrarLeito = (Button) findViewById(R.id.bt_cadastrar_leito);
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        databaseReference = ConfiguracaoFirebase.getFirebase();
 
-        botaoSair = (Button) findViewById(R.id.bt_sair);
+        Button botaoSair = (Button) findViewById(R.id.bt_sair);
         botaoSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

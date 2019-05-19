@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText senha;
-    private Button botaoLogar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
     private DatabaseReference databaseReference;
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             setContentView(R.layout.activity_login);
             email = (EditText) findViewById(R.id.edit_login_email);
             senha = (EditText) findViewById(R.id.edit_login_senha);
-            botaoLogar = (Button) findViewById(R.id.botao_logar);
+            Button botaoLogar = (Button) findViewById(R.id.botao_logar);
 
             botaoLogar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,10 +58,6 @@ public class LoginActivity extends AppCompatActivity {
             String idUsuario = autenticacao.getUid();
             verificarUsuarioLogado(idUsuario);
         }
-
-
-
-
     }
 
     private void verificarUsuarioLogado(String idUser) {
@@ -79,15 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     if(group.equals("001")){
-                        //Toast.makeText(LoginActivity.this, "É Administrador, CORRREEEEEEEEEE!!!", Toast.LENGTH_SHORT).show();
                         Intent it = new Intent(LoginActivity.this, MainActivity.class);
                         it.putExtra("grupoUsuario", group);
                         startActivity(it);
                         finish();
                     }
                     else{
-                        //Toast.makeText(LoginActivity.this, "Não é Administrador Galera!!!", Toast.LENGTH_SHORT).show();
-                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent it = new Intent(LoginActivity.this, MainUserActivity.class);
                         it.putExtra("grupoUsuario", group);
                         startActivity(it);
                         finish();
@@ -122,16 +115,9 @@ public class LoginActivity extends AppCompatActivity {
                                     autenticacao.signOut();
                                 }
                                 else{
-                                    if(group.equals("001")){
-                                        abrirTelaPrincipal(group);
-                                    }
-                                    else{
-                                        abrirTelaPrincipal(group);
-                                    }
+                                    abrirTelaPrincipal(group);
                                 }
-
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -164,18 +150,15 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
         else{
-            Intent it = new Intent(LoginActivity.this, NadaActivity.class);
+            Intent it = new Intent(LoginActivity.this, MainUserActivity.class);
             it.putExtra("grupoUsuario", id);
             startActivity(it);
             finish();
         }
-
-
     }
 
     public void abrirCadastroUsuario(View view){
         Intent it = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
         startActivity(it);
     }
-
 }
