@@ -25,6 +25,7 @@ public class LeitosStatusActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    private String grupo;
 
     private List<Leito> leitos = new ArrayList<>();
     private ArrayAdapter<Leito> arrayAdapterLeito;
@@ -38,6 +39,8 @@ public class LeitosStatusActivity extends AppCompatActivity {
         //Recebendo dados de outra Activity
         Intent it = getIntent();
         String situacao = it.getStringExtra("status");
+        grupo = it.getStringExtra("grupo");
+        Toast.makeText(LeitosStatusActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
 
         TextView id = (TextView) findViewById(R.id.situacaoLeito);
         id.setText(situacao);
@@ -53,6 +56,7 @@ public class LeitosStatusActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(LeitosStatusActivity.this, DetalheLeitoActivity.class);
                 intent.putExtra("leito", leitos.get(position));
+                intent.putExtra("grupo", grupo);
                 startActivity(intent);
             }
         });

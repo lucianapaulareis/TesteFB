@@ -78,78 +78,91 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.seletor);
 
         //Enfermaria
-        if(grupo.equals("002")){
-            if(situacaoLeito.equals("Livre")){
+        switch (grupo) {
+            case "002":
+                switch (situacaoLeito) {
+                    case "Livre":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Ocupado");
+                        break;
+                    case "Aguardando Forragem":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Em Forragem");
+                        break;
+                    case "Em Forragem":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Livre");
+                        break;
+                    default:
+                        Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
+                        conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
+
+                        break;
+                }
+                break;
+
+            //Portaria
+            case "003":
+                switch (situacaoLeito) {
+                    case "Ocupado":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Aguardando Higienização");
+                        break;
+                    default:
+                        Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
+                        conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
+                        break;
+                }
+                break;
+
+            //SHL
+            case "004":
+                switch (situacaoLeito) {
+                    case "Aguardando Higienização":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Em Higienização");
+                        break;
+                    case "Em Higienização":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Aguardando Forragem");
+                        break;
+                    default:
+                        Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
+                        conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
+
+                        break;
+                }
+                break;
+
+            //Camareira
+            case "005":
+                switch (situacaoLeito) {
+                    case "Aguardando Forragem":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Em Forragem");
+                        break;
+                    case "Em Forragem":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Livre");
+                        break;
+                    default:
+                        Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
+                        conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
+
+                        break;
+                }
+                break;
+
+            //Administrador
+            default:
                 nomeS.add("Selecione o novo Status");
                 nomeS.add("Ocupado");
-            }
-            else if(situacaoLeito.equals("Aguardando Forragem")){
-                nomeS.add("Selecione o novo Status");
-                nomeS.add("Em Forragem");
-            }
-            else if(situacaoLeito.equals("Em Forragem")){
-                nomeS.add("Selecione o novo Status");
-                nomeS.add("Livre");
-            }
-            else{
-                Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
-                conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-            }
-        }
-
-        //Portaria
-        else if(grupo.equals("003")){
-            if(situacaoLeito.equals("Ocupado")){
-                nomeS.add("Selecione o novo Status");
                 nomeS.add("Aguardando Higienização");
-            }
-            else {
-                Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
-                conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-            }
-        }
-
-        //SHL
-        else if(grupo.equals("004")){
-            if(situacaoLeito.equals("Aguardando Higienização")){
-                nomeS.add("Selecione o novo Status");
                 nomeS.add("Em Higienização");
-            }
-            else if(situacaoLeito.equals("Em Higienização")){
-                nomeS.add("Selecione o novo Status");
                 nomeS.add("Aguardando Forragem");
-            }
-            else {
-                Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
-                conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-            }
-        }
-
-        //Camareira
-        else if(grupo.equals("005")){
-            if(situacaoLeito.equals("Aguardando Forragem")){
-                nomeS.add("Selecione o novo Status");
                 nomeS.add("Em Forragem");
-            }
-            else if(situacaoLeito.equals("Em Forragem")){
-                nomeS.add("Selecione o novo Status");
                 nomeS.add("Livre");
-            }
-            else {
-                Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
-                conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-            }
-        }
-
-        //Administrador
-        else{
-            nomeS.add("Selecione o novo Status");
-            nomeS.add("Ocupado");
-            nomeS.add("Aguardando Higienização");
-            nomeS.add("Em Higienização");
-            nomeS.add("Aguardando Forragem");
-            nomeS.add("Em Forragem");
-            nomeS.add("Livre");
+                break;
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(DetalheLeitoActivity.this,

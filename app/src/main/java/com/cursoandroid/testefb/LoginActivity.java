@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 String group = (String) dataSnapshot.child("grupo").getValue();
                 if(group == null){
                     Toast.makeText(LoginActivity.this, "Usuário não está alocado em um grupo de permissão!", Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(LoginActivity.this, NadaActivity.class);
+                    Intent it = new Intent(LoginActivity.this, Teste.class);
                     startActivity(it);
                     finish();
                 }
@@ -111,7 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String group = (String) dataSnapshot.child("grupo").getValue();
                                 if(group == null){
-                                    Toast.makeText(LoginActivity.this, "Usuário não está alocado em um grupo de permissão!", Toast.LENGTH_LONG).show();
+                                    /*Toast.makeText(LoginActivity.this, "Usuário não está alocado em um grupo de permissão!", Toast.LENGTH_LONG).show();*/
+                                    Toast.makeText(LoginActivity.this, "Este usuário não tem grupo!", Toast.LENGTH_LONG).show();
                                     autenticacao.signOut();
                                 }
                                 else{
