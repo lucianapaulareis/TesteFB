@@ -14,6 +14,7 @@ public class MainUserActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
     private String grupo;
+    private String nome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,8 @@ public class MainUserActivity extends AppCompatActivity {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         Intent it = getIntent();
         grupo = it.getStringExtra("grupoUsuario");
-        Toast.makeText(MainUserActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
+        nome = it.getStringExtra("nome");
+        Toast.makeText(MainUserActivity.this, "Grupo: "+grupo+"\nNome: "+nome, Toast.LENGTH_SHORT).show();
 
         Button botaoSair = (Button) findViewById(R.id.bt_sair);
         botaoSair.setOnClickListener(new View.OnClickListener() {

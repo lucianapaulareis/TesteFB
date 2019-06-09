@@ -110,13 +110,14 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String group = (String) dataSnapshot.child("grupo").getValue();
+                                String nome = (String) dataSnapshot.child("nome").getValue();
                                 if(group == null){
                                     /*Toast.makeText(LoginActivity.this, "Usuário não está alocado em um grupo de permissão!", Toast.LENGTH_LONG).show();*/
                                     Toast.makeText(LoginActivity.this, "Este usuário não tem grupo!", Toast.LENGTH_LONG).show();
                                     autenticacao.signOut();
                                 }
                                 else{
-                                    abrirTelaPrincipal(group);
+                                    abrirTelaPrincipal(group, nome);
                                 }
                             }
                             @Override
@@ -143,10 +144,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void abrirTelaPrincipal(String id) {
+    private void abrirTelaPrincipal(String id, String nome) {
         if(id.equals("001")){
             Intent it = new Intent(LoginActivity.this, MainActivity.class);
             it.putExtra("grupoUsuario", id);
+            it.putExtra("nome", nome);
             startActivity(it);
             finish();
         }

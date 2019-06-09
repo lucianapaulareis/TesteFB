@@ -38,22 +38,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent it = getIntent();
-        grupo = it.getStringExtra("grupoUsuario");
-        Toast.makeText(MainActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        if(autenticacao.getCurrentUser() != null){
+            Intent it = getIntent();
+            grupo = it.getStringExtra("grupoUsuario");
+            Toast.makeText(MainActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
+            autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
-        Button botaoSair = (Button) findViewById(R.id.bt_sair);
-        botaoSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                autenticacao.signOut();
-                Intent it = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
+            Button botaoSair = (Button) findViewById(R.id.bt_sair);
+            botaoSair.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    autenticacao.signOut();
+                    Intent it = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+            });
+        }
+        else{
+            Toast.makeText(MainActivity.this, "Não há nenhum usuário logado!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void listarSetores(View View) {
@@ -65,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void listarLeitos(View View) {
         Intent it = new Intent(this, LeitosOpcoesActivity.class);
-        startActivityForResult(it, 1);
+        it.putExtra("grupo",grupo);
+        startActivity(it);
     }
 
     public void cadastraSetores (View View){

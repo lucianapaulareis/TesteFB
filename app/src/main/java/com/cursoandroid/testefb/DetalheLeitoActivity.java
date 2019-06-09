@@ -63,17 +63,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         conjuntoEdicao = (RelativeLayout) findViewById(R.id.conjuntoEdicao);
         salvarAlteracao = (Button) findViewById(R.id.bt_salvar_alteracao);
 
-        // -------------------------------------------------
-        /*nomeS.add(0, "Selecione o novo Status");
-        nomeS.add(1, "Ocupado");
-        nomeS.add(2, "Aguardando Higienização");
-        nomeS.add(3, "Em Higienização");
-        nomeS.add(4, "Aguardando Forragem");
-        nomeS.add(5, "Em Forragem");
-        nomeS.add(6, "Livre");*/
-        // -------------------------------------------------
-
-
         //Spinner
         spinner = (Spinner) findViewById(R.id.seletor);
 
@@ -149,6 +138,20 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                         Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
                         conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
 
+                        break;
+                }
+                break;
+
+            //Internação
+            case "006":
+                switch (situacaoLeito) {
+                    case "Livre":
+                        nomeS.add("Selecione o novo Status");
+                        nomeS.add("Ocupado");
+                        break;
+                    default:
+                        Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
+                        conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
                         break;
                 }
                 break;
