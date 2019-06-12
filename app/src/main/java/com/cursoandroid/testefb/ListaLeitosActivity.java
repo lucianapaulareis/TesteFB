@@ -27,7 +27,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
+    private String mudar;
     private List<Leito> leitos = new ArrayList<>();
     private ArrayAdapter<Leito> arrayAdapterLeito;
     ListView listV_leitos;
@@ -43,6 +43,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
         final String grupo = intent.getStringExtra("grupo");
         Toast.makeText(ListaLeitosActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
         final String idSetor = setor.getUid();
+        mudar = intent.getStringExtra("mudar");
         String nomeSetor = setor.getNome();
         TextView id = (TextView) findViewById(R.id.idSetor);
         id.setText(idSetor);
@@ -61,6 +62,9 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 intent.putExtra("leito", leitos.get(position));
                 intent.putExtra("grupo", grupo);
                 //intent.putExtra("idSetor", idSetor);
+                if(mudar != null){
+                    intent.putExtra("mudar", mudar);
+                }
                 startActivity(intent);
             }
         });

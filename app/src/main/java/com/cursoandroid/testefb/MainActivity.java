@@ -63,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void listarSetores(View View) {
         Intent it = new Intent(this, ListaSetoresActivity.class);
-        it.putExtra("grupo",grupo);
+        it.putExtra("grupo", grupo);
         startActivityForResult(it, 1);
     }
 
 
     public void listarLeitos(View View) {
         Intent it = new Intent(this, LeitosOpcoesActivity.class);
-        it.putExtra("grupo",grupo);
+        it.putExtra("grupo", grupo);
         startActivity(it);
     }
 
@@ -86,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void gerenciarUsuarios(View view){
         Intent it = new Intent(this, GerenciaUsuariosActivity.class);
+        startActivity(it);
+    }
+
+    public void mudarLeitoSetor(View view){
+        Intent it = new Intent(this, ListaSetoresActivity.class);
+        it.putExtra("mudar", "mudar");
         startActivity(it);
     }
 

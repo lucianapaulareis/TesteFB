@@ -26,9 +26,10 @@
             android:text="Listar Setores"
             android:onClick="listarSetores"
             android:id="@+id/listarSetores"
-            android:layout_below="@+id/listarLeitos"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="52dp" />
 
         <Button
             android:layout_width="fill_parent"
@@ -36,9 +37,9 @@
             android:text="Listar Leitos"
             android:onClick="listarLeitos"
             android:id="@+id/listarLeitos"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/bt_cadastroSetores"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentLeft="true" />
 
         <Button
             android:layout_width="match_parent"
@@ -54,9 +55,9 @@
             android:text="Cadastrar Setores"
             android:onClick="cadastraSetores"
             android:id="@+id/bt_cadastroSetores"
-            android:layout_below="@+id/bt_mudarLeitoSetor"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/bt_cadastroLeitos"
+            android:layout_alignParentLeft="true" />
 
         <Button
             android:layout_width="fill_parent"
@@ -64,18 +65,9 @@
             android:text="Cadastrar Leitos"
             android:id="@+id/bt_cadastroLeitos"
             android:onClick="cadastraLeito"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="42dp" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Mudar Leito de Setor"
-            android:id="@+id/bt_mudarLeitoSetor"
-            android:layout_below="@+id/bt_gerenciar_usuarios"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/listarSetores"
+            android:layout_alignParentLeft="true" />
 
         <Button
             android:layout_width="fill_parent"
@@ -83,8 +75,17 @@
             android:text="Gerenciar Usuários"
             android:onClick="gerenciarUsuarios"
             android:id="@+id/bt_gerenciar_usuarios"
-            android:layout_below="@+id/bt_cadastroLeitos"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/listarLeitos"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mudar Leito de Setor"
+            android:onClick="mudarLeitoSetor"
+            android:id="@+id/bt_mudarLeitoSetor"
+            android:layout_below="@+id/bt_gerenciar_usuarios"
+            android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

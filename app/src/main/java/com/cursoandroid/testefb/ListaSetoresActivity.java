@@ -24,7 +24,7 @@ public class ListaSetoresActivity extends AppCompatActivity {
 
     private List<Setor> setores = new ArrayList<Setor>();
     private ArrayAdapter<Setor> arrayAdapterSetor;
-
+    private String mudar;
     ListView listV_dados;
 
     FirebaseDatabase firebaseDatabase;
@@ -37,6 +37,7 @@ public class ListaSetoresActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         final String grupo = it.getStringExtra("grupo");
+        mudar = it.getStringExtra("mudar");
         Toast.makeText(ListaSetoresActivity.this, "Grupo: "+grupo, Toast.LENGTH_LONG).show();
 
         listV_dados = (ListView) findViewById(R.id.listV_dados);
@@ -50,6 +51,9 @@ public class ListaSetoresActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListaSetoresActivity.this, ListaLeitosActivity.class);
                 intent.putExtra("setor", setores.get(position));
                 intent.putExtra("grupo", grupo);
+                if(mudar != null){
+                    intent.putExtra("mudar", mudar);
+                }
                 startActivity(intent);
             }
         });

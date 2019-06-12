@@ -35,7 +35,8 @@
         <activity android:name=".CadastroLeitoActivity" />
         <activity android:name=".GerenciaUsuariosActivity" />
         <activity android:name=".DetalheUsuarioActivity" />
-        <activity android:name=".MainUserActivity"></activity>
+        <activity android:name=".MainUserActivity" />
+        <activity android:name=".MudarSetorLeitoActivity"></activity>
     </application>
 
 </manifest>
