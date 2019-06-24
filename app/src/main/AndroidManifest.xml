@@ -13,7 +13,6 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,7 +22,7 @@
         <activity android:name=".UsuariosListActivity" />
         <activity android:name=".Teste" />
         <activity android:name=".ListaLeitosActivity" />
-        <activity android:name=".DetalheLeitoActivity" />
+        <activity android:name=".DetalheLeitoActivity"/>
         <activity android:name=".NadaActivity" />
         <activity android:name=".ListaSetoresActivity" />
         <activity android:name=".LeitosOpcoesActivity" />
@@ -36,7 +35,7 @@
         <activity android:name=".GerenciaUsuariosActivity" />
         <activity android:name=".DetalheUsuarioActivity" />
         <activity android:name=".MainUserActivity" />
-        <activity android:name=".MudarSetorLeitoActivity"></activity>
+        <activity android:name=".MudarSetorLeitoActivity" />
     </application>
 
 </manifest>

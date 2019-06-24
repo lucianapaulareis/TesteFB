@@ -1,9 +1,18 @@
 package com.cursoandroid.testefb;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,26 +32,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//Alterar o App para ler as informações no modelo atualizado de dados
 
 public class ListaLeitosActivity extends AppCompatActivity {
 
+    private FirebaseAuth autenticacao;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private String mudar;
     private List<Leito> leitos = new ArrayList<>();
     private ArrayAdapter<Leito> arrayAdapterLeito;
     ListView listV_leitos;
+    private String grupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_leitos);
-
-
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
-        final String grupo = intent.getStringExtra("grupo");
+        grupo = intent.getStringExtra("grupo");
+
         Toast.makeText(ListaLeitosActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
         final String idSetor = setor.getUid();
         mudar = intent.getStringExtra("mudar");
@@ -69,6 +80,8 @@ public class ListaLeitosActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void eventoDatabase() {
         Intent intent = getIntent();

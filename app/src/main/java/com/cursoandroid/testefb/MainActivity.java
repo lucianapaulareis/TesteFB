@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private String grupo;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

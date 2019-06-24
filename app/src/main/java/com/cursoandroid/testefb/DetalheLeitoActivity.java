@@ -45,9 +45,10 @@ public class DetalheLeitoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe_leito);
-
+        databaseReference = ConfiguracaoFirebase.getFirebase();
         Intent intent = getIntent();
         Leito leito = intent.getParcelableExtra("leito");
+        Toast.makeText(DetalheLeitoActivity.this, "Leito: "+leito.getNome(), Toast.LENGTH_SHORT).show();
         String grupo = intent.getStringExtra("grupo");
         mudar = intent.getStringExtra("mudar");
         String idLeito = leito.getUid();
@@ -122,6 +123,7 @@ public class DetalheLeitoActivity extends AppCompatActivity {
             }
         }
         else{
+        conjuntoEdicaoSetor.setVisibility(View.GONE);
         //Enfermaria
         switch (grupo) {
             case "002":
@@ -141,7 +143,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
                         conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-                        conjuntoEdicaoSetor.setVisibility(View.INVISIBLE);
                         break;
                 }
                 break;
@@ -156,7 +157,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
                         conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-                        conjuntoEdicaoSetor.setVisibility(View.INVISIBLE);
                         break;
                 }
                 break;
@@ -175,7 +175,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
                         conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-                        conjuntoEdicaoSetor.setVisibility(View.INVISIBLE);
                         break;
                 }
                 break;
@@ -194,7 +193,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
                         conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-                        conjuntoEdicaoSetor.setVisibility(View.INVISIBLE);
                         break;
                 }
                 break;
@@ -209,54 +207,13 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(DetalheLeitoActivity.this, "Usuário não autorizado a atualizar o Status deste leito", Toast.LENGTH_SHORT).show();
                         conjuntoEdicao.setVisibility(View.INVISIBLE);//Esconder a opção de edição do leito (Spinner e botão salvar)
-                        conjuntoEdicaoSetor.setVisibility(View.INVISIBLE);
                         break;
                 }
                 break;
 
             //Administrador
             default:
-                /*if (mudar != null) {
-                    databaseReference = ConfiguracaoFirebase.getFirebase();
-                    databaseReference.child("Setores").orderByChild("nome").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                String nomeSetor = (String) snapshot.child("nome").getValue();
-                                novoSetor.add(nomeSetor);
-                                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(DetalheLeitoActivity.this,
-                                        android.R.layout.simple_list_item_1, novoSetor);
-                                spinner2.setAdapter(arrayAdapter);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    //Escolha do status do leito
-                    spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        TextView s1;
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                            String status = novoSetor.get(position);
-                            if(status.equals("Selecione o novo Status")){
-                                s1 = (TextView) findViewById(R.id.edit_novoSetor);
-                                s1.setText("");//Quando acontecer isso, não salvar
-                            }
-                            else{
-                                s1 = (TextView) findViewById(R.id.edit_novoSetor);
-                                s1.setText(status);
-                            }
-                        }
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-                        }
-                    });
-                } */
-                //else {
-                    conjuntoEdicaoSetor.setVisibility(View.INVISIBLE);
+                    conjuntoEdicaoSetor.setVisibility(View.GONE);
                     nomeS.add("Selecione o novo Status");
                     nomeS.add("Ocupado");
                     nomeS.add("Aguardando Higienização");
@@ -264,8 +221,6 @@ public class DetalheLeitoActivity extends AppCompatActivity {
                     nomeS.add("Aguardando Forragem");
                     nomeS.add("Em Forragem");
                     nomeS.add("Livre");
-                //}
-
                 break;
         }
         }
@@ -292,19 +247,13 @@ public class DetalheLeitoActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        inicializarFirebase();
-    }
 
-
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(DetalheLeitoActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
     }
 
     public void alterar(View view){
         Intent intent = getIntent();
         Leito leito = intent.getParcelableExtra("leito");
+        String grupo = intent.getStringExtra("grupo");
         String idLeito = leito.getUid();
         String nomeLeito = leito.getNome();
         String idSetor = leito.getSid();
@@ -318,10 +267,25 @@ public class DetalheLeitoActivity extends AppCompatActivity {
             Toast.makeText(DetalheLeitoActivity.this, "Por favor selecione um novo status para o leito.", Toast.LENGTH_SHORT).show();
         }
         else{
-            leito.setSituacao(status);
-            databaseReference.child("Leitos").child(idLeito).setValue(leito);
-            Toast.makeText(DetalheLeitoActivity.this, "Status do leito: "+nomeLeito+"\nAlterado para: "+status, Toast.LENGTH_LONG).show();
-            finish();
+            if(grupo.equals("001")){
+                leito.setSituacao(status);
+                databaseReference.child("Leitos").child(idLeito).setValue(leito);
+                //Toast.makeText(DetalheLeitoActivity.this, "Status do leito: "+nomeLeito+"\nAlterado para: "+status, Toast.LENGTH_LONG).show();
+                Intent it = new Intent(this, MainActivity.class);
+                it.putExtra("grupoUsuario", grupo);
+                startActivity(it);
+                finish();
+            }
+            else{
+                leito.setSituacao(status);
+                databaseReference.child("Leitos").child(idLeito).setValue(leito);
+                Toast.makeText(DetalheLeitoActivity.this, "Grupo Detalhe: "+grupo+"\nAlterado para: "+status, Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(this, MainUserActivity.class);
+                it.putExtra("grupoUsuario", grupo);
+                startActivity(it);
+                finish();
+            }
+
         }
     }
 
@@ -343,7 +307,9 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         else{
             leito.setSid(s);
             databaseReference.child("Leitos").child(idLeito).setValue(leito);
-            Toast.makeText(DetalheLeitoActivity.this, "Setor do leito: "+nomeLeito+"\nAlterado para: "+s, Toast.LENGTH_LONG).show();
+            Toast.makeText(DetalheLeitoActivity.this, "Setor do leito: "+nomeLeito, Toast.LENGTH_LONG).show();
+            Intent it = new Intent(this, MainActivity.class);
+            startActivity(it);
             finish();
         }
     }

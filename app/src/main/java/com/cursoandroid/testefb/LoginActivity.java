@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void verificarUsuarioLogado(String idUser) {
+    private void verificarUsuarioLogado(final String idUser) {
         databaseReference = ConfiguracaoFirebase.getFirebase();
         databaseReference.child("Usuarios").child(idUser).addValueEventListener(new ValueEventListener() {
             @Override
