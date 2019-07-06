@@ -1,18 +1,9 @@
 package com.cursoandroid.testefb;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,29 +11,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class ListaLeitosActivity extends AppCompatActivity {
 
-    private FirebaseAuth autenticacao;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-    private String mudar;
-    private List<Leito> leitos = new ArrayList<>();
-    private ArrayAdapter<Leito> arrayAdapterLeito;
+    private DatabaseReference databaseReference;
+    private ArrayList<Leito> leitos = new ArrayList<Leito>();
     ListView listV_leitos;
     private String grupo;
+    private String mudar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +34,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Setor setor = intent.getParcelableExtra("setor");
         grupo = intent.getStringExtra("grupo");
 
-        Toast.makeText(ListaLeitosActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ListaLeitosActivity.this, "Grupo: " + grupo, Toast.LENGTH_SHORT).show();
         final String idSetor = setor.getUid();
         mudar = intent.getStringExtra("mudar");
         String nomeSetor = setor.getNome();
@@ -61,7 +43,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
         TextView nome = (TextView) findViewById(R.id.nomeSetorId);
         nome.setText(nomeSetor);
         listV_leitos = (ListView) findViewById(R.id.listV_leitos);
-        inicializarFirebase();
+
         eventoDatabase();
 
         //Evento de clique em um item da listView
@@ -72,8 +54,8 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
                 intent.putExtra("leito", leitos.get(position));
                 intent.putExtra("grupo", grupo);
-                //intent.putExtra("idSetor", idSetor);
-                if(mudar != null){
+                intent.putExtra("idSetor", idSetor);
+                if (mudar != null) {
                     intent.putExtra("mudar", mudar);
                 }
                 startActivity(intent);
@@ -82,32 +64,42 @@ public class ListaLeitosActivity extends AppCompatActivity {
     }
 
 
-
     private void eventoDatabase() {
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
         String idSetor = setor.getUid();
-        //Query para listar os leitos de determinado setor, identificando-o pelo "idSetor"
+        databaseReference = ConfiguracaoFirebase.getFirebase();
         databaseReference.child("Leitos").orderByChild("sid").equalTo(idSetor).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                leitos.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Leito l = objSnapshot.getValue(Leito.class);
-                    leitos.add(l);
+                if (dataSnapshot.exists()) {
+                    listV_leitos = (ListView) findViewById(R.id.listV_leitos);
+                    leitos = new ArrayList<Leito>();
+                    for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                        Leito l = objSnapshot.getValue(Leito.class);
+                        leitos.add(l);
+                    }
+                    ArrayAdapter adapter = new LeitoAdapter(getApplicationContext(), leitos);
+                    listV_leitos.setAdapter(adapter);
+                    listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            //Toast.makeText(Teste.this, "Leito: "+leitos.get(i).getSituacao(), Toast.LENGTH_SHORT).show();
+                            Intent it = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
+                            it.putExtra("leito", leitos.get(i));
+                            it.putExtra("grupo", grupo);
+                            startActivity(it);
+                        }
+                    });
+                } else {
+                    Toast.makeText(ListaLeitosActivity.this, "Este setor não possui leitos cadastrados.", Toast.LENGTH_LONG).show();
+                    finish();
                 }
-                arrayAdapterLeito = new ArrayAdapter<>(ListaLeitosActivity.this, android.R.layout.simple_list_item_1, leitos);
-                listV_leitos.setAdapter(arrayAdapterLeito);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-    }
-
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(ListaLeitosActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
     }
 }

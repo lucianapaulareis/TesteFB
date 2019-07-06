@@ -58,6 +58,30 @@ public class Leito implements Parcelable {
         this.situacao = situacao;
     }
 
+    public int getImagemLivre(){
+        return R.mipmap.ic_livre;
+    }
+
+    public int getImagemOcupado(){
+        return R.mipmap.ic_ocupado;
+    }
+
+    public int getImagemHigienizacao(){
+        return R.mipmap.ic_emhig;
+    }
+
+    public int getImagemAguardandoHigienizacao(){
+        return R.mipmap.ic_aghig;
+    }
+
+    public int getImagemEmForragem(){
+        return R.mipmap.ic_forro;
+    }
+
+    public int getImagemAguardandoForragem(){
+        return R.mipmap.ic_agforro;
+    }
+
     public String getSid() {
         return sid;
     }

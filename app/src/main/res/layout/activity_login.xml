@@ -20,7 +20,7 @@
         android:hint="Digite seu e-mail" />
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textSize="16dp"
@@ -31,10 +31,10 @@
         android:shadowRadius="5"
         android:text="@string/botao_logar"
         android:id="@+id/botao_logar"
-        android:layout_below="@+id/edit_login_email"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/edit_login_senha"
+        android:layout_alignLeft="@+id/logo"
+        android:layout_alignStart="@+id/logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,9 +60,9 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:background="@drawable/hospital"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_margarida"
+        android:layout_width="249dp"
+        android:layout_height="170dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

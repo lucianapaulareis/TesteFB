@@ -94,5 +94,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(it);
     }
 
+    public void teste(View view){
+        Intent it = new Intent(this, Teste.class);
+        startActivity(it);
+    }
+
 
 }

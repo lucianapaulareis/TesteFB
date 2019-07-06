@@ -25,6 +25,7 @@ public class ListaSetoresActivity extends AppCompatActivity {
     private List<Setor> setores = new ArrayList<Setor>();
     private ArrayAdapter<Setor> arrayAdapterSetor;
     private String mudar;
+    private String grupo;
     ListView listV_dados;
 
     FirebaseDatabase firebaseDatabase;
@@ -36,7 +37,7 @@ public class ListaSetoresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_setores);
 
         Intent it = getIntent();
-        final String grupo = it.getStringExtra("grupo");
+        grupo = it.getStringExtra("grupo");
         mudar = it.getStringExtra("mudar");
         Toast.makeText(ListaSetoresActivity.this, "Grupo: "+grupo, Toast.LENGTH_LONG).show();
 
