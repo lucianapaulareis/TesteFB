@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
@@ -27,6 +28,7 @@ import java.util.Random;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private ImageView logo;
     private EditText email;
     private EditText senha;
     private Usuario usuario;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         if(autenticacao.getCurrentUser() == null){
             setContentView(R.layout.activity_login);
+            logo = (ImageView) findViewById(R.id.logo);
             email = (EditText) findViewById(R.id.edit_login_email);
             senha = (EditText) findViewById(R.id.edit_login_senha);
             Button botaoLogar = (Button) findViewById(R.id.botao_logar);
