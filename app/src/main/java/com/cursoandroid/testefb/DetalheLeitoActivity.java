@@ -45,16 +45,17 @@ public class DetalheLeitoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe_leito);
+
         databaseReference = ConfiguracaoFirebase.getFirebase();
         Intent intent = getIntent();
         Leito leito = intent.getParcelableExtra("leito");
-        Toast.makeText(DetalheLeitoActivity.this, "Leito: "+leito.getNome(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DetalheLeitoActivity.this, "Leito: "+leito.getNome(), Toast.LENGTH_SHORT).show();
         String grupo = intent.getStringExtra("grupo");
         mudar = intent.getStringExtra("mudar");
         String idLeito = leito.getUid();
         String nomeLeito = leito.getNome();
         final String situacaoLeito = leito.getSituacao();
-        Toast.makeText(DetalheLeitoActivity.this, "Grupo: " + grupo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DetalheLeitoActivity.this, "Grupo: " + grupo+"\nMudar: "+mudar, Toast.LENGTH_SHORT).show();
 
         TextView id = (TextView) findViewById(R.id.idLeito);
         if (idLeito != null) {
@@ -78,6 +79,7 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         //novoSetor.add("Selecionar novo Setor");
         if (grupo == null) {
             if (mudar != null) {
+                Toast.makeText(DetalheLeitoActivity.this, "Mudar: ", Toast.LENGTH_SHORT).show();
                 conjuntoEdicao.setVisibility(View.GONE);
                 databaseReference = ConfiguracaoFirebase.getFirebase();
                 databaseReference.child("Setores").orderByChild("nome").addValueEventListener(new ValueEventListener() {

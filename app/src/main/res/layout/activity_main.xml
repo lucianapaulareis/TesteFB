@@ -137,7 +137,7 @@
             android:shadowDy="0"
             android:shadowRadius="5"
             android:text="Mudar Leito de Setor"
-            android:onClick="teste"
+            android:onClick="mudarLeitoSetor"
             android:id="@+id/bt_mudarLeitoSetor"
             android:layout_below="@+id/bt_gerenciar_usuarios"
             android:layout_centerHorizontal="true"

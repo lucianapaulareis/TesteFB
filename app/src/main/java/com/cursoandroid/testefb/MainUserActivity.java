@@ -130,11 +130,11 @@ public class MainUserActivity extends AppCompatActivity {
         builder.setTicker("tickerText");
         builder.setContentTitle("Mudança de status de Leito");
         builder.setContentText("O status do leito: "+nome+" \nmudou para: "+situacao);
-        builder.setSmallIcon(R.drawable.ic_search);
+        builder.setSmallIcon(R.mipmap.ic_not);
         builder.setContentIntent(p);
         Notification n = builder.build();
         n.vibrate = new long[]{150, 300, 150, 600};
-        nm.notify(R.drawable.ic_search, n);
+        nm.notify(R.mipmap.ic_not, n);
         try{
             Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone toque = RingtoneManager.getRingtone(getApplicationContext(), som);

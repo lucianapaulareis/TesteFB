@@ -39,7 +39,7 @@ public class ListaSetoresActivity extends AppCompatActivity {
         Intent it = getIntent();
         grupo = it.getStringExtra("grupo");
         mudar = it.getStringExtra("mudar");
-        Toast.makeText(ListaSetoresActivity.this, "Grupo: "+grupo, Toast.LENGTH_LONG).show();
+        Toast.makeText(ListaSetoresActivity.this, "Mudar: "+mudar, Toast.LENGTH_LONG).show();
 
         listV_dados = (ListView) findViewById(R.id.listV_dados);
 

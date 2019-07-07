@@ -23,12 +23,12 @@ import java.util.List;
 
 public class LeitosStatusActivity extends AppCompatActivity {
 
-    FirebaseDatabase firebaseDatabase;
+
     DatabaseReference databaseReference;
     private String grupo;
 
-    private List<Leito> leitos = new ArrayList<>();
-    private ArrayAdapter<Leito> arrayAdapterLeito;
+    private ArrayList<Leito> leitos = new ArrayList<>();
+    //private ArrayAdapter<Leito> arrayAdapter;
     ListView listV_leitos;
 
     @Override
@@ -44,52 +44,47 @@ public class LeitosStatusActivity extends AppCompatActivity {
 
         TextView id = (TextView) findViewById(R.id.situacaoLeito);
         id.setText(situacao);
-
-
-        listV_leitos = (ListView) findViewById(R.id.listV_leitos);
-
-        inicializarFirebase();
+        //listV_leitos = (ListView) findViewById(R.id.listV_leitos);
         eventoDatabase();
-
-        listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(LeitosStatusActivity.this, DetalheLeitoActivity.class);
-                intent.putExtra("leito", leitos.get(position));
-                intent.putExtra("grupo", grupo);
-                startActivity(intent);
-            }
-        });
     }
 
     private void eventoDatabase() {
         Intent intent = getIntent();
         String situacao = intent.getStringExtra("status");
-        //Query para listar os leitos agrupando-os pela situacao
+        databaseReference = ConfiguracaoFirebase.getFirebase();
         databaseReference.child("Leitos").orderByChild("situacao").equalTo(situacao).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                leitos.clear();
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Leito l = objSnapshot.getValue(Leito.class);
-                    leitos.add(l);
+                if (dataSnapshot.exists()) {
+                    listV_leitos = (ListView) findViewById(R.id.listV_leitos);
+                    leitos = new ArrayList<Leito>();
+                    for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                        Leito l = objSnapshot.getValue(Leito.class);
+                        leitos.add(l);
+                    }
+                    ArrayAdapter adapter = new LeitoAdapter(getApplicationContext(), leitos);
+                    listV_leitos.setAdapter(adapter);
+                    listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            //Toast.makeText(Teste.this, "Leito: "+leitos.get(i).getSituacao(), Toast.LENGTH_SHORT).show();
+                            Intent it = new Intent(LeitosStatusActivity.this, DetalheLeitoActivity.class);
+                            it.putExtra("leito", leitos.get(i));
+                            it.putExtra("grupo", grupo);
+                            it.putExtra("mudar", "mudar");
+                            startActivity(it);
+                        }
+                    });
+                } else {
+                    Toast.makeText(LeitosStatusActivity.this, "Este setor não possui leitos cadastrados.", Toast.LENGTH_LONG).show();
+                    finish();
                 }
-                arrayAdapterLeito = new ArrayAdapter<>(LeitosStatusActivity.this, android.R.layout.simple_list_item_1, leitos);
-                listV_leitos.setAdapter(arrayAdapterLeito);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
-
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(LeitosStatusActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }
-
 
 }

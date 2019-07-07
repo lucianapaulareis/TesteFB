@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,10 +34,11 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
         grupo = intent.getStringExtra("grupo");
-
-        Toast.makeText(ListaLeitosActivity.this, "Grupo: " + grupo, Toast.LENGTH_SHORT).show();
-        final String idSetor = setor.getUid();
         mudar = intent.getStringExtra("mudar");
+
+        Toast.makeText(ListaLeitosActivity.this, "Mudar: " +mudar, Toast.LENGTH_SHORT).show();
+        Log.i("mudar", "ListaLeitosActivity");
+        final String idSetor = setor.getUid();
         String nomeSetor = setor.getNome();
         TextView id = (TextView) findViewById(R.id.idSetor);
         id.setText(idSetor);
@@ -47,9 +49,10 @@ public class ListaLeitosActivity extends AppCompatActivity {
         eventoDatabase();
 
         //Evento de clique em um item da listView
-        listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.i("mudar", mudar);
                 //Toast.makeText(ListaLeitosActivity.this, "Leito: "+position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
                 intent.putExtra("leito", leitos.get(position));
@@ -57,10 +60,11 @@ public class ListaLeitosActivity extends AppCompatActivity {
                 intent.putExtra("idSetor", idSetor);
                 if (mudar != null) {
                     intent.putExtra("mudar", mudar);
+
                 }
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
 
@@ -88,6 +92,7 @@ public class ListaLeitosActivity extends AppCompatActivity {
                             Intent it = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
                             it.putExtra("leito", leitos.get(i));
                             it.putExtra("grupo", grupo);
+                            it.putExtra("mudar", "mudar");
                             startActivity(it);
                         }
                     });

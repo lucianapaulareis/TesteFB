@@ -30,7 +30,7 @@ public class LeitosOpcoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leitos_opcoes);
         //Se vier da Notificação
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.cancel(R.drawable.ic_search);
+        nm.cancel(R.mipmap.ic_not);
 
         voltar = (Button) findViewById(R.id.bt_voltar);
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
