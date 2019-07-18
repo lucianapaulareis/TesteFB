@@ -26,9 +26,11 @@ public class ListaSetoresActivity extends AppCompatActivity {
     private ArrayAdapter<Setor> arrayAdapterSetor;
     private String mudar;
     private String grupo;
+    private String editar;
+    private String excluir;
+    private String excluirSetor;
+    private String editarSetor;
     ListView listV_dados;
-
-    FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
     @Override
@@ -39,23 +41,60 @@ public class ListaSetoresActivity extends AppCompatActivity {
         Intent it = getIntent();
         grupo = it.getStringExtra("grupo");
         mudar = it.getStringExtra("mudar");
-        Toast.makeText(ListaSetoresActivity.this, "Mudar: "+mudar, Toast.LENGTH_LONG).show();
+        editar = it.getStringExtra("editar");
+        excluir = it.getStringExtra("excluir");
+        excluirSetor = it.getStringExtra("excluirSetor");
+        editarSetor = it.getStringExtra("editarSetor");
+
+        //Toast.makeText(ListaSetoresActivity.this, "Editar: "+editar+"\nGrupo: "+grupo, Toast.LENGTH_LONG).show();
 
         listV_dados = (ListView) findViewById(R.id.listV_dados);
 
-        inicializarFirebase();
+        databaseReference = ConfiguracaoFirebase.getFirebase();
         eventoDatabase();
 
         listV_dados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(ListaSetoresActivity.this, ListaLeitosActivity.class);
-                intent.putExtra("setor", setores.get(position));
-                intent.putExtra("grupo", grupo);
-                if(mudar != null){
-                    intent.putExtra("mudar", mudar);
+
+                if(excluirSetor != null){
+                    Intent intent = new Intent(ListaSetoresActivity.this, ExcluirSetorActivity.class);
+                    intent.putExtra("setor", setores.get(position));
+                    intent.putExtra("grupo", grupo);
+                    intent.putExtra("excluirSetor", excluirSetor);
+                    startActivity(intent);
                 }
-                startActivity(intent);
+                else if(editarSetor != null){
+                    Intent intent = new Intent(ListaSetoresActivity.this, EditarSetorActivity.class);
+                    intent.putExtra("setor", setores.get(position));
+                    intent.putExtra("grupo", grupo);
+                    intent.putExtra("editarSetor", editarSetor);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(ListaSetoresActivity.this, ListaLeitosActivity.class);
+                    intent.putExtra("setor", setores.get(position));
+                    if(grupo == null && mudar != null){
+                        intent.putExtra("mudar", mudar);
+                        startActivity(intent);
+                    }
+
+                    else if(editar != null){
+                        intent.putExtra("editar", "editar");
+                        intent.putExtra("grupo", grupo);
+                        startActivity(intent);
+                    }
+
+                    else if(excluir != null){
+                        intent.putExtra("excluir", excluir);
+                        intent.putExtra("grupo", grupo);
+                        startActivity(intent);
+                    }
+                    else if(grupo != null){
+                        intent.putExtra("grupo", grupo);
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }
@@ -64,15 +103,11 @@ public class ListaSetoresActivity extends AppCompatActivity {
         databaseReference.child("Setores").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //Para não ficar sobrescrevendo
                 setores.clear();
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    //Traz na ordem que estiver no banco, cada um dos objetos Usuario
                     Setor s = objSnapshot.getValue(Setor.class);
                     setores.add(s);
                 }
-
-                //Listando dados do firebase na listView
                 arrayAdapterSetor = new ArrayAdapter<Setor>(ListaSetoresActivity.this, android.R.layout.simple_list_item_1,setores);
                 listV_dados.setAdapter(arrayAdapterSetor);
             }
@@ -82,14 +117,5 @@ public class ListaSetoresActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    //Método para inicializar o Firebase
-    private void inicializarFirebase(){
-        FirebaseApp.initializeApp(ListaSetoresActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        //Permite salvar os dados na nuvem, como também dentro do app
-        //firebaseDatabase.setPersistenceEnabled(true);
-        databaseReference = firebaseDatabase.getReference();
     }
 }

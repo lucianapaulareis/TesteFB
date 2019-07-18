@@ -40,7 +40,7 @@ public class LeitosStatusActivity extends AppCompatActivity {
         Intent it = getIntent();
         String situacao = it.getStringExtra("status");
         grupo = it.getStringExtra("grupo");
-        Toast.makeText(LeitosStatusActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(LeitosStatusActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
 
         TextView id = (TextView) findViewById(R.id.situacaoLeito);
         id.setText(situacao);

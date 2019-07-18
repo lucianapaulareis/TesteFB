@@ -22,48 +22,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="ID:"
-        android:id="@+id/textView12"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="32dp" />
-
-    <EditText
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/edit_uid_setor"
-        android:layout_alignTop="@+id/textView12"
-        android:layout_toRightOf="@+id/textView12"
-        android:layout_toEndOf="@+id/textView12" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nome:"
-        android:id="@+id/textView13"
-        android:layout_below="@+id/edit_uid_setor"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/textView16"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/textView11"
+        android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_nome_setor"
-        android:layout_alignTop="@+id/textView13"
-        android:layout_toRightOf="@+id/textView13"
-        android:layout_toEndOf="@+id/textView13" />
+        android:layout_below="@+id/textView16"
+        android:textAlignment="center" />
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cadastrar"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:id="@+id/bt_cadastrar_setor"
-        android:layout_below="@+id/edit_nome_setor"
+        android:layout_marginBottom="53dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp" />
+        android:layout_gravity="center" />
 
 </RelativeLayout>

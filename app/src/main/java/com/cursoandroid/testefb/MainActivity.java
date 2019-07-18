@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
             Intent it = getIntent();
             grupo = it.getStringExtra("grupoUsuario");
             Toast.makeText(MainActivity.this, "Grupo: "+grupo, Toast.LENGTH_SHORT).show();
-            autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
             Button botaoSair = (Button) findViewById(R.id.bt_sair);
             botaoSair.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +78,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(it);
     }
 
-    public void cadastraLeito(View view){
-        Intent it = new Intent(this, CadastroLeitoActivity.class);
-        startActivity(it);
-    }
-
     public void gerenciarUsuarios(View view){
         Intent it = new Intent(this, GerenciaUsuariosActivity.class);
         startActivity(it);
@@ -96,7 +90,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void teste(View view){
-        Intent it = new Intent(this, Teste.class);
+        Intent it = new Intent(MainActivity.this, GerenciarLeitoActivity.class);
+        it.putExtra("grupo", grupo);
+        startActivity(it);
+    }
+
+    public void gerenciarSetores(View view){
+        Intent it = new Intent(MainActivity.this, GerenciarSetoresActivity.class);
+        it.putExtra("grupo", grupo);
         startActivity(it);
     }
 

@@ -26,6 +26,8 @@ public class ListaLeitosActivity extends AppCompatActivity {
     ListView listV_leitos;
     private String grupo;
     private String mudar;
+    private String editar;
+    private String excluir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,11 @@ public class ListaLeitosActivity extends AppCompatActivity {
         Setor setor = intent.getParcelableExtra("setor");
         grupo = intent.getStringExtra("grupo");
         mudar = intent.getStringExtra("mudar");
+        editar = intent.getStringExtra("editar");
+        excluir = intent.getStringExtra("excluir");
 
-        Toast.makeText(ListaLeitosActivity.this, "Mudar: " +mudar, Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(ListaLeitosActivity.this, "Grupo: " +grupo, Toast.LENGTH_SHORT).show();
         Log.i("mudar", "ListaLeitosActivity");
         final String idSetor = setor.getUid();
         String nomeSetor = setor.getNome();
@@ -48,29 +53,13 @@ public class ListaLeitosActivity extends AppCompatActivity {
 
         eventoDatabase();
 
-        //Evento de clique em um item da listView
-        /*listV_leitos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Log.i("mudar", mudar);
-                //Toast.makeText(ListaLeitosActivity.this, "Leito: "+position, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
-                intent.putExtra("leito", leitos.get(position));
-                intent.putExtra("grupo", grupo);
-                intent.putExtra("idSetor", idSetor);
-                if (mudar != null) {
-                    intent.putExtra("mudar", mudar);
-
-                }
-                startActivity(intent);
-            }
-        });*/
     }
 
 
     private void eventoDatabase() {
         Intent intent = getIntent();
         Setor setor = intent.getParcelableExtra("setor");
+        //String grupo = intent.getStringExtra("grupo");
         String idSetor = setor.getUid();
         databaseReference = ConfiguracaoFirebase.getFirebase();
         databaseReference.child("Leitos").orderByChild("sid").equalTo(idSetor).addValueEventListener(new ValueEventListener() {
@@ -89,15 +78,39 @@ public class ListaLeitosActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             //Toast.makeText(Teste.this, "Leito: "+leitos.get(i).getSituacao(), Toast.LENGTH_SHORT).show();
-                            Intent it = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
-                            it.putExtra("leito", leitos.get(i));
-                            it.putExtra("grupo", grupo);
-                            it.putExtra("mudar", "mudar");
-                            startActivity(it);
+                            if(mudar != null){
+                                Intent it = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
+                                it.putExtra("leito", leitos.get(i));
+                                it.putExtra("grupo", grupo);
+                                it.putExtra("mudar", mudar);
+                                startActivity(it);
+                            }
+                            else if(editar != null){
+                                Intent it = new Intent(ListaLeitosActivity.this, EditarLeitoActivity.class);
+                                it.putExtra("leito", leitos.get(i));
+                                it.putExtra("grupo", grupo);
+                                it.putExtra("editar", editar);
+                                startActivity(it);
+                            }
+                            else if(excluir != null){
+                                Intent it = new Intent(ListaLeitosActivity.this, ExcluirLeitoActivity.class);
+                                it.putExtra("leito", leitos.get(i));
+                                it.putExtra("grupo", grupo);
+                                it.putExtra("excluir", excluir);
+                                it.putExtra("grupo", grupo);
+                                startActivity(it);
+                            }
+                            else if(grupo != null){
+                                Intent it = new Intent(ListaLeitosActivity.this, DetalheLeitoActivity.class);
+                                it.putExtra("leito", leitos.get(i));
+                                it.putExtra("grupo", grupo);
+                                startActivity(it);
+                            }
+
                         }
                     });
                 } else {
-                    Toast.makeText(ListaLeitosActivity.this, "Este setor não possui leitos cadastrados.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ListaLeitosActivity.this, "Este setor não possui leito cadastrado.", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }

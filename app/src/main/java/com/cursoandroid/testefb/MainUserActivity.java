@@ -51,7 +51,7 @@ public class MainUserActivity extends AppCompatActivity {
                 Leito l = dataSnapshot.getValue(Leito.class);
                 switch (grupo){
                     case "002":
-                        if(l.getSituacao().equals("Livre") || l.getSituacao().equals("Aguardando Forragem") || l.getSituacao().equals("Em Forragem")){
+                        if(l.getSituacao().equals("Livre") || l.getSituacao().equals("Aguardando Forragem")){
                             enviarNotificacao(l.getNome(), l.getSituacao());
                         }
                         break;
@@ -63,13 +63,13 @@ public class MainUserActivity extends AppCompatActivity {
                         break;
 
                     case "004":
-                        if(l.getSituacao().equals("Aguardando Higienização") || l.getSituacao().equals("Em Higienização")){
+                        if(l.getSituacao().equals("Aguardando Higienização")){
                             enviarNotificacao(l.getNome(), l.getSituacao());
                         }
                         break;
 
                     case "005":
-                        if(l.getSituacao().equals("Aguardando Forragem") || l.getSituacao().equals("Em Forragem")){
+                        if(l.getSituacao().equals("Aguardando Forragem")){
                             enviarNotificacao(l.getNome(), l.getSituacao());
                         }
                         break;

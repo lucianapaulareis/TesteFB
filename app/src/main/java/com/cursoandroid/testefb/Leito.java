@@ -96,6 +96,11 @@ public class Leito implements Parcelable {
         databaseReference.child("Leitos").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
     }
 
+    public void excluir(String id){
+        DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
+        databaseReference.child("Leitos").child(id).removeValue();
+    }
+
     @Override
     public String toString() {
         return nome;

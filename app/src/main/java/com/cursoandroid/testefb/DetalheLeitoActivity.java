@@ -79,7 +79,7 @@ public class DetalheLeitoActivity extends AppCompatActivity {
         //novoSetor.add("Selecionar novo Setor");
         if (grupo == null) {
             if (mudar != null) {
-                Toast.makeText(DetalheLeitoActivity.this, "Mudar: ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DetalheLeitoActivity.this, "Mudar: ", Toast.LENGTH_SHORT).show();
                 conjuntoEdicao.setVisibility(View.GONE);
                 databaseReference = ConfiguracaoFirebase.getFirebase();
                 databaseReference.child("Setores").orderByChild("nome").addValueEventListener(new ValueEventListener() {

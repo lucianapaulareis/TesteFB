@@ -9,8 +9,7 @@ public final class ConfiguracaoFirebase {
     private static DatabaseReference referenciaFirebase;
     private static FirebaseAuth autenticacao;
 
-    public static DatabaseReference getFirebase(){//com o static não precisa instanciar a classe
-                                                  //a cada momento
+    public static DatabaseReference getFirebase(){
         if(referenciaFirebase == null){
             referenciaFirebase = FirebaseDatabase.getInstance().getReference();
         }

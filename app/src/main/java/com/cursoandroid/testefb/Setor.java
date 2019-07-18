@@ -51,6 +51,11 @@ public class Setor implements Parcelable{
         databaseReference.child("Setores").child(getUid()).setValue(this);//Seta os dados desse próprio objeto usuário
     }
 
+    public void excluir(String id){
+        DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
+        databaseReference.child("Setores").child(id).removeValue();
+    }
+
     @Override
     public String toString() {
         return nome;

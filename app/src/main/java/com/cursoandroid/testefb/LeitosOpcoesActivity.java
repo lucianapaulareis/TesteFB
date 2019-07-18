@@ -41,7 +41,7 @@ public class LeitosOpcoesActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     grupo = (String) dataSnapshot.child("grupo").getValue();
-                    Toast.makeText(LeitosOpcoesActivity.this, "Grupo: " + grupo, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LeitosOpcoesActivity.this, "Grupo: " + grupo, Toast.LENGTH_SHORT).show();
                     voltar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

@@ -22,7 +22,6 @@ public class CadastroSetorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_setor);
 
-        idSetor = (EditText) findViewById(R.id.edit_uid_setor);
         nomeSetor = (EditText) findViewById(R.id.edit_nome_setor);
         cadastroSetor = (Button) findViewById(R.id.bt_cadastrar_setor);
         cadastroSetor.setOnClickListener(new View.OnClickListener() {

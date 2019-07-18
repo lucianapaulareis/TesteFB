@@ -10,47 +10,69 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".PesquisaActivity" />
         <activity android:name=".MenuUsuarioActivity" />
-        <activity android:name=".DetalheUsuario"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".DetalheUsuario"
+            android:screenOrientation="portrait" />
         <activity android:name=".UsuariosListActivity" />
         <activity android:name=".Teste" />
-        <activity android:name=".ListaLeitosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DetalheLeitoActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ListaLeitosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetalheLeitoActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".NadaActivity" />
-        <activity android:name=".ListaSetoresActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LeitosOpcoesActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LeitosStatusActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ListaSetoresActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LeitosOpcoesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LeitosStatusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ValidadorActivity" />
-        <activity android:name=".CadastroUsuarioActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CadastroSetorActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CadastroLeitoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GerenciaUsuariosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DetalheUsuarioActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainUserActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MudarSetorLeitoActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CadastroUsuarioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CadastroSetorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CadastroLeitoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GerenciaUsuariosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetalheUsuarioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MudarSetorLeitoActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".GerenciarLeitoActivity" />
+        <activity android:name=".EditarLeitoActivity" />
+        <activity android:name=".ExcluirLeitoActivity" />
+        <activity android:name=".GerenciarSetoresActivity" />
+        <activity android:name=".ExcluirSetorActivity" />
+        <activity android:name=".EditarSetorActivity"></activity>
     </application>
 
 </manifest>
