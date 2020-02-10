@@ -10,7 +10,6 @@ public class Setor implements Parcelable{
     private String nome;
 
     public Setor() {
-
     }
 
     protected Setor(Parcel in) {

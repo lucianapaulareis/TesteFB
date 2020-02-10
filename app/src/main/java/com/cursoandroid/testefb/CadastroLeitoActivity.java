@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import java.util.UUID;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,15 @@ public class CadastroLeitoActivity extends AppCompatActivity {
     private Setor setorSelecionado;
     private Situacao situacaoSelecionada;
     private String grupo;
+
+    public static int generateUniqueId() {
+        UUID idOne = UUID.randomUUID();
+        String str=""+idOne;
+        int uid=str.hashCode();
+        String filterStr=""+uid;
+        str=filterStr.replaceAll("-", "");
+        return Integer.parseInt(str);
+    }
 
 
     @Override
@@ -147,21 +157,17 @@ public class CadastroLeitoActivity extends AppCompatActivity {
         databaseReference.child("Leitos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                numeroDeLeitos = (int) dataSnapshot.getChildrenCount();
-                numeroDeLeitos++;
-                //Toast.makeText(CadastroLeitoActivity.this, "Número de Leitos: "+numeroDeLeitos, Toast.LENGTH_SHORT).show();
-                final String id = Integer.toString(numeroDeLeitos);
                 cadastraLeito.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         leito = new Leito();
+                        String id = String.valueOf(generateUniqueId());
                         leito.setUid(id);
                         leito.setNome(nomeLeito.getText().toString());
                         leito.setSid(setorSelecionado.getUid());
                         leito.setSituacao(situacaoSelecionada.getDescricao());
                         leito.salvar();
                         Toast.makeText(CadastroLeitoActivity.this, "Leito cadastrado com sucesso: ", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(CadastroLeitoActivity.this, "Leito Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                         Intent it = new Intent(CadastroLeitoActivity.this, MainActivity.class);
                         it.putExtra("grupoUsuario", grupo);
                         startActivity(it);
