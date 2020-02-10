@@ -18,7 +18,7 @@ public class CadastroSetorActivity extends AppCompatActivity {
     private Setor setor;
 
 
-    
+
     public static int generateUniqueId() {
         UUID idOne = UUID.randomUUID();
         String str=""+idOne;
